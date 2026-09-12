@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn AI the school way — tokens to agents</title>
+<meta name="description" content="12 branch-by-branch AI lessons: tokens, embeddings, attention, RLHF, LoRA, prompting, RAG, agents, diffusion — ELI5 school analogies, diagrams and zero-dependency Python labs.">
+<style>
+  :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --blue:#2563eb; --bad:#dc2626; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.6; }
+  .wrap { max-width:1080px; margin:0 auto; padding:28px 20px 60px; }
+  a { color:var(--blue); } h1 { font-size:2rem; line-height:1.25; } h2 { font-size:1.4rem; margin:44px 0 6px; }
+  .sub { color:var(--muted); max-width:74ch; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 8px; }
+  .chip { border:1px solid var(--line); background:var(--card); border-radius:999px; padding:6px 14px; font-size:.85rem; color:var(--muted); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin-top:16px; }
+  .lesson { background:var(--card); border:1px solid var(--line); border-top:5px solid var(--c,var(--accent)); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:6px; }
+  .lesson .top { display:flex; align-items:center; gap:10px; }
+  .lesson .num { flex:none; width:30px; height:30px; border-radius:50%; background:var(--c,var(--accent)); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; }
+  .lesson h3 { font-size:1.02rem; line-height:1.3; } .lesson .ana { color:var(--muted); font-size:.9rem; }
+  .lesson code { font-size:.78rem; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
+  .lesson a.go { margin-top:auto; font-weight:600; font-size:.9rem; text-decoration:none; } .lesson a.go+a.go { margin-top:0; } .lesson a.go:hover { text-decoration:underline; }
+  .callout { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--ok); border-radius:14px; padding:18px 20px; margin-top:16px; }
+  pre { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:auto; font-size:.88rem; margin-top:12px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; border-radius:10px; padding:10px 18px; text-decoration:none; font-weight:700; margin:14px 10px 0 0; }
+  .btn.alt { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .vs { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:16px; }
+  .vcol { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; } .vcol h3 { margin-bottom:8px; }
+  .vcol ul { margin-left:18px; color:var(--muted); font-size:.93rem; }
+  footer { margin-top:56px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:.88rem; }
+
+  .dsec { background:var(--card); border:1px solid var(--line); border-top:6px solid var(--c,var(--accent)); border-radius:16px; padding:22px 22px 16px; margin-top:26px; scroll-margin-top:16px; }
+  .dsec h2 { font-size:1.25rem; display:flex; align-items:center; gap:10px; }
+  .dsec h2 .ln { flex:none; width:32px; height:32px; border-radius:50%; background:var(--c,var(--accent)); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-size:.95rem; font-weight:800; }
+  .dsec p.d { color:var(--muted); font-size:.95rem; margin:6px 0 4px; }
+  .dsec svg { width:100%; height:auto; display:block; margin-top:10px; } .dsec .foot { margin-top:8px; font-size:.92rem; }
+  .box { fill:var(--card); stroke:var(--c,var(--accent)); stroke-width:2; }
+  .soft { fill:var(--bg); stroke:var(--line); stroke-width:1.5; }
+  .dead { fill:var(--bg); stroke:var(--muted); stroke-width:1.5; stroke-dasharray:6 5; }
+  .t { font:600 14px -apple-system,"Segoe UI",sans-serif; fill:var(--ink); }
+  .s { font:12px -apple-system,"Segoe UI",sans-serif; fill:var(--muted); } .m { text-anchor:middle; }
+  .arr { stroke:#64748b; stroke-width:2; fill:none; marker-end:url(#arw); } .dash { stroke-dasharray:6 5; }
+  .nc { fill:var(--c,var(--accent)); } .nt { font:700 12px -apple-system,sans-serif; fill:#fff; text-anchor:middle; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"/></marker></defs></svg>
+<div class="wrap">
+
+  <header>
+    <h1>🧠 Learn AI the school way</h1>
+    <p class="sub">How models actually work (tokens → embeddings → attention → RLHF &amp; LoRA), then
+    how to use them well (prompting, RAG, agents, diffusion) — every concept as a school story,
+    every lesson with a numbered diagram and a hands-on lab. The labs are <b>zero-dependency
+    Python</b>: no GPU, no API key, no pip install.</p>
+    <p class="sub" style="margin-top:8px">🎬 <b>Companion video:</b>
+    <a href="https://www.youtube.com/watch?v=nVnxG10D5W0">9 AI Concepts Explained in 7 minutes</a> (ByteByteAI) — the aerial view;
+    this course is the slow ground tour of every concept it names.</p>
+    <div class="chips">
+      <span class="chip">🧩 tokens</span><span class="chip">🗺️ embeddings</span>
+      <span class="chip">👀 attention</span><span class="chip">⭐ RLHF &amp; LoRA</span>
+      <span class="chip">📖 RAG</span><span class="chip">📋 agents</span><span class="chip">📺 diffusion</span>
+    </div>
+  </header>
+
+  <div class="vs">
+    <div class="vcol" style="border-top:5px solid #7c3aed">
+      <h3>🔬 Part 1 — INSIDE the model</h3>
+      <ul>
+        <li>rules are grown from examples, not written 📖</li>
+        <li>text becomes puzzle pieces 🧩 seated by meaning 🗺️</li>
+        <li>one game: guess the next piece 🎲 — with glancing 👀</li>
+        <li>finishing school: etiquette, gold stars, sticky notes ⭐</li>
+      </ul>
+    </div>
+    <div class="vcol" style="border-top:5px solid #0d9488">
+      <h3>🧰 Part 2 — USING it for real</h3>
+      <ul>
+        <li>ask the librarian well; mind the small desk 🗣️🪑</li>
+        <li>the confident kid makes things up — defenses 🙋</li>
+        <li>open-book exams (RAG) 📖 and hall passes (agents) 📋</li>
+        <li>un-blur the static: diffusion &amp; multimodal 📺</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="big-picture">🗺️ The big picture — one diagram, both worlds</h2>
+  <p class="sub">The whole course on one canvas. Click for the
+  <a href="images/big-picture-4k.png">4K version</a>.</p>
+  <figure style="background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:16px">
+    <a href="images/big-picture-4k.png"><img src="images/big-picture.svg" alt="The big picture: inside the model (tokens, embeddings, attention, RLHF) and using it (prompting, RAG, agents, diffusion)" loading="lazy" style="width:100%;height:auto;border-radius:8px;background:#fff"></a>
+  </figure>
+
+  <h2 id="part1">🔬 Part 1 — inside the model (lessons 1–7)</h2>
+  <p class="sub">One git branch = one idea; branch 05 contains lessons 01–05. Labs run with plain Python 3.</p>
+  <div class="grid">
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">1</span><h3>📖 What is AI</h3></div><span class="ana">Rulebooks vs learning from examples — the rules are grown, not written.</span><code>lesson-01-what-is-ai</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l01">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">2</span><h3>✏️ Training</h3></div><span class="ana">Practice tests + the red pen — loss and tiny downhill nudges.</span><code>lesson-02-training</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-02-training/lessons/02-training/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l02">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">3</span><h3>🧩 Tokens</h3></div><span class="ana">Cutting text into puzzle pieces — why 'strawberry' is hard.</span><code>lesson-03-tokens</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-03-tokens/lessons/03-tokens/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l03">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">4</span><h3>🗺️ Embeddings</h3></div><span class="ana">The seating chart of meanings — similar words sit together.</span><code>lesson-04-embeddings</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-04-embeddings/lessons/04-embeddings/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l04">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">5</span><h3>🎲 Next-token prediction</h3></div><span class="ana">The sentence-completion game, with a temperature dial.</span><code>lesson-05-next-token</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-05-next-token/lessons/05-next-token/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l05">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">6</span><h3>👀 Attention</h3></div><span class="ana">Kids glancing around the class — who does 'it' refer to?</span><code>lesson-06-attention</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-06-attention/lessons/06-attention/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l06">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#7c3aed"><div class="top"><span class="num">7</span><h3>⭐ RLHF &amp; LoRA</h3></div><span class="ana">Library, etiquette class, gold stars — and sticky notes.</span><code>lesson-07-rlhf-lora</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-07-rlhf-lora/lessons/07-rlhf-lora/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l07">See the diagram ↗</a></div>
+  </div>
+
+  <h2 id="part2">🧰 Part 2 — using it for real (lessons 8–12)</h2>
+  <p class="sub">No installs here either — the labs use any chatbot you already have, plus paper and honesty.</p>
+  <div class="grid">
+    <div class="lesson" style="--c:#0d9488"><div class="top"><span class="num">8</span><h3>🗣️ Prompting &amp; context</h3></div><span class="ana">How you ask the librarian — and the small desk it fits on.</span><code>lesson-08-prompting-context</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-08-prompting-context/lessons/08-prompting-context/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l08">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#0d9488"><div class="top"><span class="num">9</span><h3>🙋 Hallucinations</h3></div><span class="ana">The confident kid who never says 'I don't know'.</span><code>lesson-09-hallucinations</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-09-hallucinations/lessons/09-hallucinations/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l09">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#0d9488"><div class="top"><span class="num">10</span><h3>📖 RAG</h3></div><span class="ana">The open-book exam, automated with the seating chart.</span><code>lesson-10-rag</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-10-rag/lessons/10-rag/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l10">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#0d9488"><div class="top"><span class="num">11</span><h3>📋 Agents &amp; tools</h3></div><span class="ana">A student with a to-do list and a hall pass.</span><code>lesson-11-agents</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-11-agents/lessons/11-agents/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l11">See the diagram ↗</a></div>
+    <div class="lesson" style="--c:#0d9488"><div class="top"><span class="num">12</span><h3>📺 Diffusion &amp; multimodal</h3></div><span class="ana">Un-blurring TV static, step by step, toward your words.</span><code>lesson-12-diffusion</code><a class="go" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-12-diffusion/lessons/12-diffusion/README.md">Read lesson →</a><a class="go" href="lesson-diagrams.html#l12">See the diagram ↗</a></div>
+  </div>
+
+  <pre><code># take the course locally:
+git clone https://github.com/BaluRaut/learn-ai-school.git
+cd learn-ai-school
+python3 demo/bigram_model.py            # a language model in 60 seconds
+git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
+
+  <div class="callout">🎓 <b>From the same school:</b>
+    <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> ·
+    <a href="https://baluraut.github.io/learn-kubernetes-school/">Kubernetes</a> ·
+    <a href="https://baluraut.github.io/learn-aws-school/">AWS</a> ·
+    <a href="https://baluraut.github.io/learn-argocd-school/">ArgoCD</a> — same analogies universe,
+    same branch-by-branch method.</div>
+
+  <h2 id="diagrams">📐 The lesson diagrams — follow the numbers</h2>
+  <p class="sub">Every lesson as one numbered box-and-arrow diagram (purple = inside the model,
+  teal = using it) — also on a <a href="lesson-diagrams.html">standalone page</a>.</p>
+
+<!-- 01 -->
+<section class="dsec" id="l01" style="--c:#7c3aed">
+  <h2><span class="ln">1</span> 📖 What is AI</h2>
+  <p class="d">Rulebooks vs learning from examples — the rules are grown, not written.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="dead" x="40" y="50" width="250" height="100" rx="12"/><text class="t m" x="165" y="85">📜 the rulebook way</text><text class="s m" x="165" y="110">if ears AND whiskers AND tail…</text><text class="s m" x="165" y="132">rule #41 breaks on cartoon cats 💥</text><rect class="box" x="40" y="180" width="250" height="90" rx="12"/><text class="t m" x="165" y="212">🐱 the examples way</text><text class="s m" x="165" y="236">10,000 photos: cat / not-cat</text><rect class="box" x="390" y="180" width="200" height="90" rx="12"/><text class="t m" x="490" y="212">✏️ training</text><text class="s m" x="490" y="236">rules GROW inside</text><rect class="box" x="660" y="180" width="250" height="90" rx="12"/><text class="t m" x="785" y="212">🧠 model</text><text class="s m" x="785" y="236">answers even for NEW cats</text><line class="arr" x1="290" y1="225" x2="386" y2="225"/><g transform="translate(338,208)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="590" y1="225" x2="656" y2="225"/><g transform="translate(623,208)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr dash" x1="165" y1="150" x2="165" y2="176"/><text class="s m" x="470" y="290">AI ⊃ machine learning ⊃ deep learning ⊃ LLMs — this course walks inward</text><g transform="translate(120,290)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">Read full lesson 01 →</a></p>
+</section>
+
+<!-- 02 -->
+<section class="dsec" id="l02" style="--c:#7c3aed">
+  <h2><span class="ln">2</span> ✏️ Training</h2>
+  <p class="d">Practice tests + the red pen — loss and tiny downhill nudges.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="90" width="200" height="90" rx="12"/><text class="t m" x="140" y="122">📚 examples</text><text class="s m" x="140" y="146">question + true answer</text><rect class="box" x="310" y="90" width="180" height="90" rx="12"/><text class="t m" x="400" y="122">🧠 model</text><text class="s m" x="400" y="146">millions of dials</text><rect class="box" x="560" y="90" width="160" height="90" rx="12"/><text class="t m" x="640" y="122">✍️ prediction</text><rect class="box" x="780" y="90" width="130" height="90" rx="12"/><text class="t m" x="845" y="122">🔴 loss</text><text class="s m" x="845" y="146">HOW wrong?</text><line class="arr" x1="240" y1="135" x2="306" y2="135"/><line class="arr" x1="490" y1="135" x2="556" y2="135"/><g transform="translate(523,118)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="720" y1="135" x2="776" y2="135"/><rect class="box" x="310" y="220" width="420" height="60" rx="12"/><text class="t m" x="520" y="245">⛰️ gradient descent: nudge EVERY dial slightly downhill</text><line class="arr" x1="845" y1="180" x2="700" y2="218"/><g transform="translate(772,205)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr dash" x1="310" y1="250" x2="400" y2="184"/><text class="s m" x="300" y="210">repeat millions of times</text><text class="s m" x="470" y="297">🧪 validation set = unseen questions — catches memorizers (overfitting)</text><g transform="translate(150,297)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-02-training/lessons/02-training/README.md">Read full lesson 02 →</a></p>
+</section>
+
+<!-- 03 -->
+<section class="dsec" id="l03" style="--c:#7c3aed">
+  <h2><span class="ln">3</span> 🧩 Tokens</h2>
+  <p class="d">Cutting text into puzzle pieces — why 'strawberry' is hard.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="100" width="220" height="90" rx="12"/><text class="t m" x="150" y="132">📝 text</text><text class="s m" x="150" y="158">&#39;the robot reads&#39;</text><rect class="box" x="330" y="100" width="250" height="90" rx="12"/><text class="t m" x="455" y="128">🧩 tokenizer - BPE</text><text class="s m" x="455" y="152">glue the most frequent pair,</text><text class="s m" x="455" y="174">repeat thousands of times</text><rect class="box" x="650" y="100" width="180" height="90" rx="12"/><text class="t m" x="740" y="132">🔢 token IDs</text><text class="s m" x="740" y="158">[464, 9379, 9743]</text><line class="arr" x1="260" y1="145" x2="326" y2="145"/><g transform="translate(293,128)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="580" y1="145" x2="646" y2="145"/><g transform="translate(613,128)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="soft" x="90" y="230" width="760" height="55" rx="10"/><text class="s m" x="470" y="253">the model sees ONLY these pieces — never words, never letters:</text><text class="s m" x="470" y="275">why &#39;how many R&#39;s in strawberry&#39; is hard 🍓 · why pricing is per-token · why some languages cost 3×</text><g transform="translate(90,230)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-03-tokens/lessons/03-tokens/README.md">Read full lesson 03 →</a></p>
+</section>
+
+<!-- 04 -->
+<section class="dsec" id="l04" style="--c:#7c3aed">
+  <h2><span class="ln">4</span> 🗺️ Embeddings</h2>
+  <p class="d">The seating chart of meanings — similar words sit together.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="100" width="180" height="90" rx="12"/><text class="t m" x="130" y="132">🧩 token &#39;cat&#39;</text><rect class="box" x="290" y="100" width="240" height="90" rx="12"/><text class="t m" x="410" y="128">🗺️ its seat coordinates</text><text class="s m" x="410" y="152">[0.31, -1.2, 0.88, …] ×768</text><text class="s m" x="410" y="174">learned, not drawn</text><rect class="soft" x="600" y="40" width="310" height="220" rx="14"/><text class="t m" x="755" y="70">the seating hall - meaning space</text><rect class="box" x="630" y="90" width="110" height="50" rx="10"/><text class="s m" x="685" y="120">cat 🐱</text><rect class="box" x="760" y="90" width="120" height="50" rx="10"/><text class="s m" x="820" y="120">kitten</text><rect class="box" x="690" y="150" width="110" height="50" rx="10"/><text class="s m" x="745" y="180">dog 🐶</text><rect class="dead" x="760" y="205" width="130" height="45" rx="10"/><text class="s m" x="825" y="232">📎 stapler - far</text><line class="arr" x1="220" y1="145" x2="286" y2="145"/><g transform="translate(253,128)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="530" y1="145" x2="596" y2="145"/><g transform="translate(563,128)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><text class="s m" x="300" y="250">distance = similarity →</text><text class="s m" x="300" y="272">semantic search, RAG (L10), king−man+woman≈queen 👑</text><g transform="translate(150,261)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-04-embeddings/lessons/04-embeddings/README.md">Read full lesson 04 →</a></p>
+</section>
+
+<!-- 05 -->
+<section class="dsec" id="l05" style="--c:#7c3aed">
+  <h2><span class="ln">5</span> 🎲 Next-token prediction</h2>
+  <p class="d">The sentence-completion game, with a temperature dial.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="90" width="220" height="90" rx="12"/><text class="t m" x="150" y="122">📝 pieces so far</text><text class="s m" x="150" y="148">&#39;The dog chased the&#39;</text><rect class="box" x="330" y="70" width="250" height="130" rx="12"/><text class="t m" x="455" y="100">📊 scoreboard over ALL pieces</text><text class="s m" x="455" y="126">cat 24% · ball 17% · car 9%</text><text class="s m" x="455" y="148">… stapler 0.0001%</text><text class="s m" x="455" y="176">one full scoreboard per step</text><rect class="box" x="650" y="90" width="180" height="90" rx="12"/><text class="t m" x="740" y="118">🎛️ temperature</text><text class="s m" x="740" y="142">0: safe · 1: natural</text><text class="s m" x="740" y="164">2: chaos</text><line class="arr" x1="260" y1="135" x2="326" y2="135"/><g transform="translate(293,118)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="580" y1="135" x2="646" y2="135"/><g transform="translate(613,118)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="box" x="330" y="230" width="250" height="55" rx="12"/><text class="t m" x="455" y="258">🧩 picked: &#39;cat&#39; — glue on</text><line class="arr" x1="740" y1="180" x2="540" y2="228"/><line class="arr dash" x1="330" y1="255" x2="150" y2="184"/><g transform="translate(240,225)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><text class="s m" x="240" y="255">repeat — that&#39;s why</text><text class="s m" x="240" y="277">answers STREAM</text>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-05-next-token/lessons/05-next-token/README.md">Read full lesson 05 →</a></p>
+</section>
+
+<!-- 06 -->
+<section class="dsec" id="l06" style="--c:#7c3aed">
+  <h2><span class="ln">6</span> 👀 Attention</h2>
+  <p class="d">Kids glancing around the class — who does 'it' refer to?</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="soft" x="40" y="40" width="870" height="60" rx="10"/><text class="t m" x="475" y="76">&#39;The robot dropped the ball because IT was heavy&#39;</text><rect class="box" x="80" y="140" width="240" height="110" rx="12"/><text class="t m" x="200" y="170">👀 &#39;it&#39; glances around</text><text class="s m" x="200" y="196">learned weights:</text><text class="s m" x="200" y="218">robot 65% · heavy 14% · ball 5%</text><rect class="box" x="400" y="140" width="220" height="110" rx="12"/><text class="t m" x="510" y="170">🎨 blend</text><text class="s m" x="510" y="196">&#39;it&#39; comes out</text><text class="s m" x="510" y="218">ROBOT-flavored 🤖</text><rect class="box" x="690" y="140" width="220" height="110" rx="12"/><text class="t m" x="800" y="166">🏗️ transformer</text><text class="s m" x="800" y="190">this, ×many heads,</text><text class="s m" x="800" y="212">×32 layers, ALL tokens</text><text class="s m" x="800" y="234">in parallel</text><line class="arr" x1="200" y1="100" x2="200" y2="136"/><g transform="translate(180,118)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="320" y1="195" x2="396" y2="195"/><g transform="translate(358,178)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr" x1="620" y1="195" x2="686" y2="195"/><g transform="translate(653,178)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><text class="s m" x="475" y="290">query·key similarity on the seats (L04) → softmax → weighted blend — demo prints these exact numbers</text>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-06-attention/lessons/06-attention/README.md">Read full lesson 06 →</a></p>
+</section>
+
+<!-- 07 -->
+<section class="dsec" id="l07" style="--c:#7c3aed">
+  <h2><span class="ln">7</span> ⭐ RLHF &amp; LoRA</h2>
+  <p class="d">Library, etiquette class, gold stars — and sticky notes.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="90" width="200" height="100" rx="12"/><text class="t m" x="140" y="120">📚 pretraining</text><text class="s m" x="140" y="144">read EVERYTHING</text><text class="s m" x="140" y="166">months · $$$M · once</text><rect class="box" x="300" y="90" width="200" height="100" rx="12"/><text class="t m" x="400" y="120">🎓 fine-tuning</text><text class="s m" x="400" y="144">Q→A examples:</text><text class="s m" x="400" y="166">learn to ANSWER</text><rect class="box" x="560" y="90" width="200" height="100" rx="12"/><text class="t m" x="660" y="120">⭐ RLHF</text><text class="s m" x="660" y="144">humans pick better →</text><text class="s m" x="660" y="166">taste-judge → nudge</text><rect class="box" x="810" y="90" width="100" height="100" rx="12"/><text class="t m" x="860" y="130">🤖</text><text class="s m" x="860" y="155">the</text><text class="s m" x="860" y="175">assistant</text><line class="arr" x1="240" y1="140" x2="296" y2="140"/><g transform="translate(268,123)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="500" y1="140" x2="556" y2="140"/><g transform="translate(528,123)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr" x1="760" y1="140" x2="806" y2="140"/><g transform="translate(783,123)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><rect class="soft" x="300" y="230" width="460" height="55" rx="12"/><text class="t m" x="530" y="254">🗒️ LoRA: freeze the brain, learn tiny sticky notes</text><text class="s m" x="530" y="276">~0.1% of the size · one GPU · swappable per customer</text><line class="arr dash" x1="700" y1="230" x2="840" y2="194"/><g transform="translate(700,257)"><circle r="11" class="nc"/><text class="nt" dy="4">4</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-07-rlhf-lora/lessons/07-rlhf-lora/README.md">Read full lesson 07 →</a></p>
+</section>
+
+<!-- 08 -->
+<section class="dsec" id="l08" style="--c:#0d9488">
+  <h2><span class="ln">8</span> 🗣️ Prompting &amp; context</h2>
+  <p class="d">How you ask the librarian — and the small desk it fits on.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="60" y="60" width="500" height="200" rx="14"/><text class="t m" x="310" y="90">🪑 the desk - context window: N tokens, that&#39;s ALL there is</text><rect class="soft" x="85" y="110" width="210" height="50" rx="8"/><text class="s m" x="190" y="140">📜 role + rules (system)</text><rect class="soft" x="310" y="110" width="225" height="50" rx="8"/><text class="s m" x="422" y="140">💬 conversation - oldest slides off</text><rect class="soft" x="85" y="175" width="210" height="50" rx="8"/><text class="s m" x="190" y="205">📎 pasted docs + examples</text><rect class="soft" x="310" y="175" width="225" height="50" rx="8"/><text class="s m" x="422" y="205">✍️ the answer itself - also here!</text><rect class="box" x="640" y="60" width="270" height="110" rx="12"/><text class="t m" x="775" y="88">🗣️ the craft</text><text class="s m" x="775" y="112">say who to be · exact ask ·</text><text class="s m" x="775" y="134">show examples (few-shot) ·</text><text class="s m" x="775" y="156">&#39;think step by step first&#39;</text><line class="arr" x1="640" y1="120" x2="564" y2="120"/><g transform="translate(602,103)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><rect class="dead" x="640" y="200" width="270" height="70" rx="12"/><text class="s m" x="775" y="228">🕳️ not on the desk = doesn&#39;t exist:</text><text class="s m" x="775" y="250">no memory between chats · middle gets skimmed</text><g transform="translate(620,235)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><text class="s m" x="310" y="290">same model, 10× better output — prompting is iteration, not incantation</text><g transform="translate(90,290)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-08-prompting-context/lessons/08-prompting-context/README.md">Read full lesson 08 →</a></p>
+</section>
+
+<!-- 09 -->
+<section class="dsec" id="l09" style="--c:#0d9488">
+  <h2><span class="ln">9</span> 🙋 Hallucinations</h2>
+  <p class="d">The confident kid who never says 'I don't know'.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="90" width="230" height="100" rx="12"/><text class="t m" x="155" y="120">❓ thin-shelf question</text><text class="s m" x="155" y="144">&#39;books about Mongolian</text><text class="s m" x="155" y="166">pirates?&#39;</text><rect class="box" x="340" y="90" width="260" height="100" rx="12"/><text class="t m" x="470" y="118">🧠 the machine</text><text class="s m" x="470" y="142">produce the LIKELIEST continuation</text><text class="s m" x="470" y="164">truth was never in the loss (L02)</text><rect class="dead" x="670" y="90" width="240" height="100" rx="12"/><text class="t m" x="790" y="118">🙋 fluent · confident · WRONG</text><text class="s m" x="790" y="142">realistic fake title,</text><text class="s m" x="790" y="164">fake author, page count</text><line class="arr" x1="270" y1="140" x2="336" y2="140"/><g transform="translate(303,123)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="600" y1="140" x2="666" y2="140"/><g transform="translate(633,123)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="soft" x="60" y="225" width="260" height="60" rx="10"/><text class="s m" x="190" y="248">📖 defense 1: facts ON the desk</text><text class="s m" x="190" y="268">(paste them — or RAG, L10)</text><rect class="soft" x="345" y="225" width="260" height="60" rx="10"/><text class="s m" x="475" y="248">🧾 defense 2: &#39;quote the exact</text><text class="s m" x="475" y="268">sentence you base this on&#39;</text><rect class="soft" x="630" y="225" width="280" height="60" rx="10"/><text class="s m" x="770" y="248">🤷 defense 3: &#39;if unsure, say so&#39;</text><text class="s m" x="770" y="268">+ verify anything you&#39;d act on</text><g transform="translate(60,225)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-09-hallucinations/lessons/09-hallucinations/README.md">Read full lesson 09 →</a></p>
+</section>
+
+<!-- 10 -->
+<section class="dsec" id="l10" style="--c:#0d9488">
+  <h2><span class="ln">10</span> 📖 RAG</h2>
+  <p class="d">The open-book exam, automated with the seating chart.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="soft" x="40" y="40" width="360" height="115" rx="12"/><text class="t m" x="220" y="66">1 before exam season - once</text><rect class="box" x="60" y="80" width="140" height="60" rx="10"/><text class="s m" x="130" y="105">📚 handbook</text><text class="s m" x="130" y="127">→ ✂️ chunks</text><rect class="box" x="230" y="80" width="150" height="60" rx="10"/><text class="s m" x="305" y="105">🗺️ vector DB</text><text class="s m" x="305" y="127">seat per chunk</text><line class="arr" x1="200" y1="110" x2="226" y2="110"/><rect class="box" x="40" y="200" width="180" height="80" rx="12"/><text class="t m" x="130" y="230">❓ question</text><text class="s m" x="130" y="254">embedded too</text><rect class="box" x="290" y="200" width="220" height="80" rx="12"/><text class="t m" x="400" y="228">📍 nearest seats</text><text class="s m" x="400" y="252">= most relevant chunks</text><rect class="box" x="580" y="180" width="330" height="110" rx="12"/><text class="t m" x="745" y="208">🪑 the desk</text><text class="s m" x="745" y="232">question + those chunks +</text><text class="s m" x="745" y="254">&#39;answer ONLY from these, cite&#39; 🧾</text><line class="arr dash" x1="130" y1="200" x2="280" y2="145"/><g transform="translate(200,168)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr" x1="220" y1="240" x2="286" y2="240"/><g transform="translate(253,223)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><line class="arr" x1="510" y1="240" x2="576" y2="240"/><g transform="translate(543,223)"><circle r="11" class="nc"/><text class="nt" dy="4">4</text></g><text class="s m" x="475" y="300">facts → RAG · style → fine-tune (L07) — the rule of rules</text>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-10-rag/lessons/10-rag/README.md">Read full lesson 10 →</a></p>
+</section>
+
+<!-- 11 -->
+<section class="dsec" id="l11" style="--c:#0d9488">
+  <h2><span class="ln">11</span> 📋 Agents &amp; tools</h2>
+  <p class="d">A student with a to-do list and a hall pass.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="box" x="40" y="100" width="190" height="90" rx="12"/><text class="t m" x="135" y="130">📋 goal</text><text class="s m" x="135" y="154">&#39;organize the</text><text class="s m" x="135" y="176">class picnic&#39;</text><rect class="box" x="300" y="100" width="180" height="90" rx="12"/><text class="t m" x="390" y="130">🧠 THINK</text><text class="s m" x="390" y="154">next-token planning</text><text class="s m" x="390" y="176">in words (L05!)</text><rect class="box" x="550" y="100" width="170" height="90" rx="12"/><text class="t m" x="635" y="130">🧰 ACT</text><text class="s m" x="635" y="154">writes a tool call:</text><text class="s m" x="635" y="176">roster.count()</text><rect class="box" x="790" y="100" width="120" height="90" rx="12"/><text class="t m" x="850" y="130">👀 LOOK</text><text class="s m" x="850" y="154">result → desk:</text><text class="s m" x="850" y="176">23 kids</text><line class="arr" x1="230" y1="145" x2="296" y2="145"/><g transform="translate(263,128)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="480" y1="145" x2="546" y2="145"/><g transform="translate(513,128)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><line class="arr" x1="720" y1="145" x2="786" y2="145"/><line class="arr dash" x1="850" y1="190" x2="390" y2="230"/><line class="arr dash" x1="390" y1="230" x2="390" y2="194"/><g transform="translate(620,225)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><text class="s m" x="620" y="250">loop until the goal is met</text><rect class="soft" x="60" y="255" width="850" height="40" rx="10"/><text class="s m" x="485" y="280">🚧 guardrails: read-only tools by default · spending caps · human sign-off for field-trip forms · logs of every step</text><g transform="translate(60,255)"><circle r="11" class="nc"/><text class="nt" dy="4">4</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-11-agents/lessons/11-agents/README.md">Read full lesson 11 →</a></p>
+</section>
+
+<!-- 12 -->
+<section class="dsec" id="l12" style="--c:#0d9488">
+  <h2><span class="ln">12</span> 📺 Diffusion &amp; multimodal</h2>
+  <p class="d">Un-blurring TV static, step by step, toward your words.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="soft" x="40" y="40" width="400" height="110" rx="12"/><text class="t m" x="240" y="66">🎨 homework, millions of times</text><rect class="box" x="60" y="80" width="110" height="55" rx="10"/><text class="s m" x="115" y="105">🐱 photo</text><text class="s m" x="115" y="125">+noise ×1000</text><rect class="box" x="200" y="80" width="100" height="55" rx="10"/><text class="s m" x="250" y="112">📺 static</text><rect class="box" x="320" y="80" width="100" height="55" rx="10"/><text class="s m" x="370" y="105">learn: predict</text><text class="s m" x="370" y="125">the noise</text><line class="arr" x1="170" y1="107" x2="196" y2="107"/><line class="arr" x1="300" y1="107" x2="316" y2="107"/><rect class="box" x="40" y="190" width="130" height="80" rx="12"/><text class="t m" x="105" y="222">📺 pure</text><text class="t m" x="105" y="244">static</text><rect class="box" x="240" y="190" width="270" height="80" rx="12"/><text class="t m" x="375" y="218">🌀 un-noise ×20-50 steps</text><text class="s m" x="375" y="244">prompt&#39;s meaning-seat (L04) steers each step</text><rect class="box" x="580" y="190" width="150" height="80" rx="12"/><text class="t m" x="655" y="222">🐱👑 &#39;cat with</text><text class="t m" x="655" y="244">a crown&#39;</text><line class="arr" x1="170" y1="230" x2="236" y2="230"/><g transform="translate(203,213)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="510" y1="230" x2="576" y2="230"/><g transform="translate(543,213)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="soft" x="760" y="150" width="150" height="140" rx="12"/><text class="s m" x="835" y="180">👀 multimodal:</text><text class="s m" x="835" y="202">images/audio</text><text class="s m" x="835" y="224">become tokens too —</text><text class="s m" x="835" y="246">same desk, same</text><text class="s m" x="835" y="268">attention (L03/L06)</text><g transform="translate(760,150)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-12-diffusion/lessons/12-diffusion/README.md">Read full lesson 12 →</a></p>
+</section>
+
+  <a class="btn" href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">Start Lesson 01 →</a>
+  <a class="btn alt" href="study-plan.html">🗓️ Study plan (4 weeks)</a>
+  <a class="btn alt" href="lesson-diagrams.html">📐 All 12 lesson diagrams</a>
+  <a class="btn alt" href="before-and-tradeoffs.html">⏮️ Before &amp; trade-offs</a>
+
+  <footer>
+    Learn AI School · zero magic left ·
+    <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a> ·
+    companion video: <a href="https://www.youtube.com/watch?v=nVnxG10D5W0">ByteByteAI — 9 AI Concepts</a>
+  </footer>
+
+</div>
+</body>
+</html>

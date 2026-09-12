@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before & trade-offs — Learn AI School</title>
+<meta name="description" content="For every big AI idea: what the world looked like before it, its merits and demerits, and where to use it vs where not.">
+<style>
+  :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --blue:#2563eb; --bad:#dc2626; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.6; }
+  .wrap { max-width:1080px; margin:0 auto; padding:28px 20px 60px; }
+  a { color:var(--blue); } h1 { font-size:2rem; line-height:1.25; } h2 { font-size:1.4rem; margin:44px 0 6px; }
+  .sub { color:var(--muted); max-width:74ch; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 8px; }
+  .chip { border:1px solid var(--line); background:var(--card); border-radius:999px; padding:6px 14px; font-size:.85rem; color:var(--muted); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px; margin-top:16px; }
+  .lesson { background:var(--card); border:1px solid var(--line); border-top:5px solid var(--c,var(--accent)); border-radius:14px; padding:16px; display:flex; flex-direction:column; gap:6px; }
+  .lesson .top { display:flex; align-items:center; gap:10px; }
+  .lesson .num { flex:none; width:30px; height:30px; border-radius:50%; background:var(--c,var(--accent)); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; }
+  .lesson h3 { font-size:1.02rem; line-height:1.3; } .lesson .ana { color:var(--muted); font-size:.9rem; }
+  .lesson code { font-size:.78rem; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px; }
+  .lesson a.go { margin-top:auto; font-weight:600; font-size:.9rem; text-decoration:none; } .lesson a.go+a.go { margin-top:0; } .lesson a.go:hover { text-decoration:underline; }
+  .callout { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--ok); border-radius:14px; padding:18px 20px; margin-top:16px; }
+  pre { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; overflow-x:auto; font-size:.88rem; margin-top:12px; }
+  .btn { display:inline-block; background:var(--accent); color:#fff; border-radius:10px; padding:10px 18px; text-decoration:none; font-weight:700; margin:14px 10px 0 0; }
+  .btn.alt { background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .vs { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:16px; }
+  .vcol { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; } .vcol h3 { margin-bottom:8px; }
+  .vcol ul { margin-left:18px; color:var(--muted); font-size:.93rem; }
+  footer { margin-top:56px; border-top:1px solid var(--line); padding-top:18px; color:var(--muted); font-size:.88rem; }
+
+  .term { background:var(--card); border:1px solid var(--line); border-top:6px solid var(--c,var(--accent)); border-radius:16px; padding:22px; margin-top:26px; scroll-margin-top:16px; }
+  .term h2 { font-size:1.3rem; margin-bottom:10px; }
+  .hist { background:var(--bg); border-left:5px solid var(--c,var(--accent)); border-radius:10px; padding:14px 16px; margin:10px 0 14px; }
+  .hist b { display:block; margin-bottom:4px; } .hist p { color:var(--muted); font-size:.95rem; }
+  .quad { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
+  .q { border:1px solid var(--line); border-radius:12px; padding:14px; }
+  .q h4 { margin-bottom:6px; font-size:.98rem; } .q ul { margin-left:18px; color:var(--muted); font-size:.92rem; }
+  .q.merit { border-top:4px solid var(--ok); } .q.demerit { border-top:4px solid var(--bad); }
+  .q.use { border-top:4px solid var(--blue); } .q.avoid { border-top:4px solid #f59e0b; }
+
+  .toc { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 6px; }
+  .toc a { border:1px solid var(--line); background:var(--card); border-radius:999px; padding:5px 12px; font-size:.82rem; color:var(--muted); text-decoration:none; }
+  .toc a:hover { color:var(--ink); border-color:var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <p><a href="index.html">← Back to the course home</a></p>
+  <h1>⏮️ Before &amp; trade-offs</h1>
+  <p class="sub">Every tool replaced something worse — and is itself the wrong tool somewhere.
+  For each big idea: what life was like <b>before</b>, honest <b>merits ✅ / demerits ❌</b>,
+  and <b>where to use it 👍 vs not 👎</b>.</p>
+  <nav class="toc">
+    <a href="#ml">🧠 ML vs rulebooks</a><a href="#tune">🗒️ Tune vs RAG vs prompt</a>
+    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a>
+  </nav>
+</header>
+
+<section class="term" id="ml" style="--c:#7c3aed">
+  <h2>🧠 Machine learning (vs rulebooks) — lessons 01–02</h2>
+  <div class="hist"><b>⏮️ Before ML took over (pre-2012 for vision, pre-2020 for language)</b><p>Software was rulebooks: expert systems, thousands of hand-written if-thens, brittle grammar engines. Spam filters listed bad words; translators stored phrase tables. Anything fuzzy — images, speech, natural language — stayed embarrassingly bad, because some rules simply cannot be written.</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>handles what rulebooks never could: fuzz, ambiguity, perception</li><li>improves with data instead of with more if-statements</li><li>one method spans images, speech, text, code</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>rules are grown → hard to inspect or fully explain</li><li>inherits its data's gaps and biases</li><li>fails weirdly (stickers fool it), not gracefully</li><li>training costs compute; behavior isn't guaranteed</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>patterns beyond writable rules: language, vision, recommendation</li><li>'roughly right, usually' is acceptable and checkable</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>exact auditable logic: payroll, tax, safety interlocks — write code!</li><li>tiny data, huge stakes, no tolerance for surprises</li><li>a regex would do — the boring tool is allowed to win 😄</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="tune" style="--c:#7c3aed">
+  <h2>🗒️ Fine-tuning &amp; LoRA vs RAG vs prompting — lessons 07, 08, 10</h2>
+  <div class="hist"><b>⏮️ Before this decision tree existed (~2022)</b><p>If you wanted a model to know or behave differently, the only lever was full retraining — museum-budget territory. Today there are three ladders, and picking wrong burns months: prompting (free, per-request), RAG (fresh facts on the desk), fine-tuning/LoRA (bake in style).</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>prompting: instant, free, reversible — always try FIRST</li><li>RAG: fresh + auditable facts, update = re-index tonight</li><li>LoRA: real style/format/domain-voice gains on one GPU</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>prompting can't add knowledge or unbreakable habits</li><li>RAG lives and dies by retrieval quality (garbage in…)</li><li>tuning: costs, drifts stale, and CANNOT reliably add facts</li><li>teams routinely fine-tune when a better prompt would have done</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>order of operations: prompt → RAG for facts → tune for style</li><li>tune when format/tone must be deep and consistent (and prompts maxed out)</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>'let's fine-tune so it knows our docs' — that's RAG's job, always</li><li>before you've even written a decent system prompt</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="rag" style="--c:#0d9488">
+  <h2>📖 RAG — lesson 10</h2>
+  <div class="hist"><b>⏮️ Before RAG (pre-2023 for most teams)</b><p>Company knowledge lived behind keyword search (exact-word-or-nothing), hand-curated FAQ bots that answered 12 questions, and 'ask Priya, she knows where the doc is'. Models answered company questions closed-book — i.e., they made things up (lesson 09).</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>grounded answers with citations — hallucination's best antidote</li><li>knowledge updates nightly (re-index), no retraining</li><li>semantic: finds meaning, not just matching words</li><li>per-question cost is pennies</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>a real pipeline to build and monitor (chunking, top-k, rerank)</li><li>retrieval misses → confident closed-book nonsense returns</li><li>struggles with cross-document reasoning ('compare all 50 contracts')</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>chat-with-your-docs, support bots, policy Q&amp;A — the classic wins</li><li>answers must cite sources (compliance loves RAG)</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>the whole corpus fits comfortably on the desk — just paste it</li><li>questions need global aggregation, not lookup → databases/BI</li><li>your documents are wrong — RAG faithfully cites garbage 😅</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="agents" style="--c:#0d9488">
+  <h2>📋 Agents &amp; tool use — lesson 11</h2>
+  <div class="hist"><b>⏮️ Before agents (~2023)</b><p>Automation meant brittle scripts and RPA bots that clicked pixel coordinates and shattered when a button moved. Chatbots could only TALK — every actual action returned to a human. The glue between 'model suggests' and 'something happens' was always a person.</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>turns advice into outcomes: looks things up, files, fixes, retries</li><li>handles fuzzy multi-step goals scripts never could</li><li>recovers from surprises by re-planning (scripts just crash)</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>errors compound step by step — confidently wrong, with momentum</li><li>harder to test: same goal, different paths each run</li><li>token costs multiply (every think-act-look loop bills)</li><li>real permissions = real blast radius — guardrails are NOT optional</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>multi-step work with verifiable outcomes (tests pass, ticket filed)</li><li>read-heavy research/triage where a human signs the final act</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>one deterministic step — a plain API call is faster and safer</li><li>irreversible actions without human gates (payments, deletes, sends)</li><li>you can't yet MEASURE task success — build evals first</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="diffusion" style="--c:#0d9488">
+  <h2>📺 Diffusion image generation — lesson 12</h2>
+  <div class="hist"><b>⏮️ Before diffusion (~2021)</b><p>Custom visuals meant stock-photo hunting, commissioning designers for every variant, or GANs — impressive but unstable to train and hard to steer with text. 'A cat astronaut in watercolor' was a commission, not a sentence.</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>any describable image in seconds; iterate by editing the sentence</li><li>steerable: style, composition, edits (inpainting), consistent characters</li><li>the same recipe scales to video and audio</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>text inside images is letter-SHAPES (L03's revenge) — often gibberish</li><li>global constraints wobble: fingers, symmetry, object counts</li><li>training-data provenance and copyright remain contested</li><li>photoreal fakes demand disclosure norms — use them</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>concepts, moods, storyboards, illustrations, product mockups</li><li>volume + iteration beat pixel-perfect fidelity</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>brand-exact detail (logos, UI text) — designers still win</li><li>factual/technical figures (use real charts! — dataviz, not vibes)</li><li>anything passing off generated people/events as real</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="openclosed" style="--c:#0d9488">
+  <h2>🔓 Open-weights vs closed API models</h2>
+  <div class="hist"><b>⏮️ Before the choice existed (~2023)</b><p>Frontier AI = a handful of closed APIs, take it or leave it. Then LLaMA-family leaks and releases created a genuine second lane: download the weights, run them yourself, tune them freely (LoRA, L07). Now every team faces the build-vs-rent question AWS taught you (EC2 course!) — for brains.</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>closed API: frontier quality, zero ops, pay-per-token</li><li>open weights: data stays home, cost-per-token can plummet at scale, tune anything, no vendor veto</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>closed: data leaves, prices/models change under you, rate limits</li><li>open: you run the GPUs (ops!), usually behind frontier quality, security patches are your job</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>closed: start here — validate the product before owning infra</li><li>open: privacy mandates, huge steady volume, deep customization</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>open 'to save money' at small scale — GPU ops eats the savings</li><li>closed for regulated data without a proper agreement in place</li></ul></div>
+  </div>
+</section>
+<footer>
+  Learn AI School · <a href="index.html">Course home</a> ·
+  <a href="lesson-diagrams.html">Lesson diagrams</a> ·
+  <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1160" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    .band1 { fill: #fff; stroke: #7c3aed; stroke-width: 3; }
+    .band2 { fill: #fff; stroke: #0d9488; stroke-width: 3; }
+    .bx  { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2; }
+    .bxp { fill: #fff; stroke: #7c3aed; stroke-width: 2.5; }
+    .bxt { fill: #fff; stroke: #0d9488; stroke-width: 2.5; }
+    .warn { fill: #fef2f2; stroke: #dc2626; stroke-width: 1.5; stroke-dasharray: 7 6; }
+    .tip  { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 1.5; }
+    .win  { fill: #f0fdfa; stroke: #0d9488; stroke-width: 1.5; }
+    .title { font-size: 36px; font-weight: 800; fill: #0f172a; }
+    .bandt { font-size: 26px; font-weight: 800; }
+    .t  { font-size: 19px; font-weight: 600; fill: #0f172a; }
+    .s  { font-size: 15px; fill: #475569; }
+    .m  { text-anchor: middle; }
+    .arr  { stroke: #64748b; stroke-width: 2.5; fill: none; marker-end: url(#arw); }
+    .dash { stroke-dasharray: 8 7; }
+    .ntb { font-size: 15px; font-weight: 700; fill: #fff; text-anchor: middle; }
+  </style>
+
+  <rect x="0" y="0" width="1920" height="1160" fill="#ffffff"/>
+  <text class="title m" x="960" y="52">The Big Picture — INSIDE the model, then USING it · five ideas, zero magic</text>
+
+  <!-- BAND 1 -->
+  <rect class="band1" x="40" y="80" width="1840" height="470" rx="20"/>
+  <text class="bandt" x="70" y="122" fill="#7c3aed">🔬 PART 1 — INSIDE THE MODEL (lessons 1–7)</text>
+
+  <rect class="bxp" x="70" y="170" width="280" height="130" rx="14"/>
+  <text class="t m" x="210" y="203">✏️ learning = the red pen</text>
+  <text class="s m" x="210" y="231">examples in → predict → measure</text>
+  <text class="s m" x="210" y="255">wrongness (loss) → nudge every</text>
+  <text class="s m" x="210" y="279">dial downhill · repeat millions×</text>
+  <g transform="translate(70,170)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">1</text></g>
+
+  <rect class="bxp" x="410" y="170" width="250" height="130" rx="14"/>
+  <text class="t m" x="535" y="203">🧩 tokens</text>
+  <text class="s m" x="535" y="231">text → learned puzzle pieces</text>
+  <text class="s m" x="535" y="255">(BPE) → ID numbers —</text>
+  <text class="s m" x="535" y="279">all the model ever sees</text>
+  <g transform="translate(410,170)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">2</text></g>
+
+  <rect class="bxp" x="720" y="170" width="260" height="130" rx="14"/>
+  <text class="t m" x="850" y="203">🗺️ embeddings</text>
+  <text class="s m" x="850" y="231">every piece gets a SEAT in</text>
+  <text class="s m" x="850" y="255">meaning-space — similar words</text>
+  <text class="s m" x="850" y="279">sit together · distance = meaning</text>
+  <g transform="translate(720,170)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">3</text></g>
+
+  <rect class="bxp" x="1040" y="170" width="280" height="130" rx="14"/>
+  <text class="t m" x="1180" y="203">👀 attention - transformer</text>
+  <text class="s m" x="1180" y="231">every token glances at every</text>
+  <text class="s m" x="1180" y="255">other: 'it' → robot 65% · ×heads</text>
+  <text class="s m" x="1180" y="279">×layers, all in parallel</text>
+  <g transform="translate(1040,170)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">4</text></g>
+
+  <rect class="bxp" x="1380" y="170" width="470" height="130" rx="14"/>
+  <text class="t m" x="1615" y="203">🎲 the one game: guess the next piece</text>
+  <text class="s m" x="1615" y="231">scoreboard over ALL ~100k pieces, every step ·</text>
+  <text class="s m" x="1615" y="255">temperature dial: 0 safe · 1 natural · 2 chaos ·</text>
+  <text class="s m" x="1615" y="279">pick, glue on, repeat — that's why answers stream</text>
+  <g transform="translate(1380,170)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">5</text></g>
+
+  <line class="arr" x1="350" y1="235" x2="406" y2="235"/>
+  <line class="arr" x1="660" y1="235" x2="716" y2="235"/>
+  <line class="arr" x1="980" y1="235" x2="1036" y2="235"/>
+  <line class="arr" x1="1320" y1="235" x2="1376" y2="235"/>
+
+  <rect class="tip" x="70" y="400" width="880" height="110" rx="14"/>
+  <text class="t m" x="510" y="438">⭐ finishing school (lesson 07)</text>
+  <text class="s m" x="510" y="466">📚 pretrain (read everything, once) → 🎓 fine-tune (learn to ANSWER) →</text>
+  <text class="s m" x="510" y="490">⭐ RLHF (humans pick better → gold stars) → 🗒️ LoRA sticky notes (~0.1%, one GPU, swappable)</text>
+  <g transform="translate(70,400)"><circle r="13" fill="#7c3aed"/><text class="ntb" dy="5">6</text></g>
+
+  <rect class="tip" x="990" y="400" width="860" height="110" rx="14"/>
+  <text class="t m" x="1420" y="438">🧪 the zero-dependency labs (in this repo)</text>
+  <text class="s m" x="1420" y="466">bigram_model.py — a whole LM in 50 lines + temperature · tokenizer_toy.py — watch BPE learn ·</text>
+  <text class="s m" x="1420" y="490">attention_toy.py — watch 'it' choose robot at 65% · plain Python, no GPU, no keys</text>
+
+  <!-- divider -->
+  <text class="t m" x="960" y="588" fill="#475569">the same five ideas, recombined — every AI headline is one of these lessons wearing a costume 🎭</text>
+
+  <!-- BAND 2 -->
+  <rect class="band2" x="40" y="610" width="1840" height="510" rx="20"/>
+  <text class="bandt" x="70" y="652" fill="#0d9488">🧰 PART 2 — USING IT FOR REAL (lessons 8–12)</text>
+
+  <rect class="bxt" x="70" y="700" width="340" height="140" rx="14"/>
+  <text class="t m" x="240" y="733">🗣️🪑 prompting &amp; the desk</text>
+  <text class="s m" x="240" y="761">role · exact ask · show examples ·</text>
+  <text class="s m" x="240" y="785">'think first' — all on ONE desk of N</text>
+  <text class="s m" x="240" y="809">tokens; oldest pages slide off</text>
+  <g transform="translate(70,700)"><circle r="13" fill="#0d9488"/><text class="ntb" dy="5">1</text></g>
+
+  <rect class="warn" x="470" y="700" width="330" height="140" rx="14"/>
+  <text class="t m" x="635" y="733">🙋 hallucinations</text>
+  <text class="s m" x="635" y="761">fluent · confident · wrong — truth</text>
+  <text class="s m" x="635" y="785">was never in the loss · defenses:</text>
+  <text class="s m" x="635" y="809">open book, receipts, 'if unsure say so'</text>
+  <g transform="translate(470,700)"><circle r="13" fill="#0d9488"/><text class="ntb" dy="5">2</text></g>
+
+  <rect class="bxt" x="860" y="700" width="460" height="140" rx="14"/>
+  <text class="t m" x="1090" y="733">📖 RAG — the open-book exam</text>
+  <text class="s m" x="1090" y="761">chunks get meaning-seats (idea #3!) → question finds</text>
+  <text class="s m" x="1090" y="785">nearest chunks → paste on the desk → answer ONLY</text>
+  <text class="s m" x="1090" y="809">from these, with citations 🧾 · facts→RAG, style→tune</text>
+  <g transform="translate(860,700)"><circle r="13" fill="#0d9488"/><text class="ntb" dy="5">3</text></g>
+
+  <rect class="bxt" x="1380" y="700" width="470" height="140" rx="14"/>
+  <text class="t m" x="1615" y="733">📋 agents — think → act → look</text>
+  <text class="s m" x="1615" y="761">still the guessing game — but tool calls get executed</text>
+  <text class="s m" x="1615" y="785">and results land back on the desk · 🚧 guardrails:</text>
+  <text class="s m" x="1615" y="809">read-only defaults, caps, human sign-off, logs</text>
+  <g transform="translate(1380,700)"><circle r="13" fill="#0d9488"/><text class="ntb" dy="5">4</text></g>
+
+  <line class="arr" x1="410" y1="770" x2="466" y2="770"/>
+  <line class="arr" x1="800" y1="770" x2="856" y2="770"/>
+  <line class="arr" x1="1320" y1="770" x2="1376" y2="770"/>
+
+  <rect class="win" x="70" y="960" width="880" height="120" rx="14"/>
+  <text class="t m" x="510" y="998">📺 diffusion &amp; multimodal (lesson 12)</text>
+  <text class="s m" x="510" y="1026">learn to un-noise photos → generate by un-noising pure static toward your words</text>
+  <text class="s m" x="510" y="1050">(embeddings steer every step) · images &amp; audio become tokens too — every sense, one desk</text>
+  <g transform="translate(70,960)"><circle r="13" fill="#0d9488"/><text class="ntb" dy="5">5</text></g>
+
+  <rect class="win" x="990" y="960" width="860" height="120" rx="14"/>
+  <text class="t m" x="1420" y="998">🎬 the companion video, decoded</text>
+  <text class="s m" x="1420" y="1026">ByteByteAI's 9 concepts → your lessons: tokenization L03 · RLHF L07 · LoRA L07 ·</text>
+  <text class="s m" x="1420" y="1050">RAG L10 · agents L11 · diffusion L12 — watch it again after the course: zero magic left 🎓</text>
+</svg>
