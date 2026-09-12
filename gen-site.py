@@ -18,6 +18,7 @@ L = [  # num, slug, folder, title, analogy, minutes, color
  (10,"lesson-10-rag","10-rag","📖 RAG","The open-book exam, automated with the seating chart.",45,P2),
  (11,"lesson-11-agents","11-agents","📋 Agents &amp; tools","A student with a to-do list and a hall pass.",45,P2),
  (12,"lesson-12-diffusion","12-diffusion","📺 Diffusion &amp; multimodal","Un-blurring TV static, step by step, toward your words.",40,P2),
+ (13,"lesson-13-mcp","13-mcp","🔌 Bonus: MCP","The universal plug — any tool into any AI app, one standard socket.",40,P2),
 ]
 
 BASE_CSS = """
@@ -169,6 +170,14 @@ SVG[12]=(f'{S} x="40" y="40" width="400" height="110" rx="12"/>{t(240,66,"🎨 h
  f'{arr(170,230,236,230)}{num(203,213,1)}{arr(510,230,576,230)}{num(543,213,2)}'
  f'{S} x="760" y="150" width="150" height="140" rx="12"/>{sm(835,180,"👀 multimodal:")}{sm(835,202,"images/audio")}{sm(835,224,"become tokens too —")}{sm(835,246,"same desk, same")}{sm(835,268,"attention (L03/L06)")}{num(760,150,3)}')
 
+SVG[13]=(f'{D} x="40" y="40" width="250" height="100" rx="12"/>{t(165,72,"🍝 before MCP")}{sm(165,96,"every app × every tool =")}{sm(165,118,"a hand-built adapter (N×M)")}'
+ f'{B} x="360" y="40" width="250" height="100" rx="12"/>{t(485,70,"🏫 hosts - the rooms")}{sm(485,94,"Claude Desktop · IDE ·")}{sm(485,116,"your agent — standard sockets 🔌")}'
+ f'{B} x="680" y="40" width="230" height="100" rx="12"/>{t(795,70,"🔬 MCP servers")}{sm(795,94,"files · GitHub · your DB —")}{sm(795,116,"standard plugs")}'
+ f'{arr(290,90,356,90)}{num(323,73,1)}{arr(610,90,676,90)}{num(643,73,2)}'
+ f'{B} x="150" y="180" width="640" height="60" rx="12"/>{t(470,205,"each server announces: my TOOLS 🧰 · my RESOURCES 📁 · my PROMPTS 📜")}{sm(470,227,"discover (tools/list) → call (tools/call) → result lands on the desk — L11&#39;s loop, standardized")}'
+ f'{arr(470,140,470,176)}{num(450,158,3)}'
+ f'{S} x="150" y="255" width="640" height="40" rx="10"/>{sm(470,280,"🚧 a server runs with YOUR permissions — installing one = installing software; L11 guardrails apply double")}{num(150,255,4)}')
+
 def dsec(n):
     _,slug,folder,title,ana,_,color = L[n-1]
     return (f'\n<!-- {n:02d} -->\n<section class="dsec" id="l{n:02d}" style="--c:{color}">\n'
@@ -176,7 +185,7 @@ def dsec(n):
       f'  <svg viewBox="0 0 940 305" role="img">{SVG[n]}\n  </svg>\n'
       f'  <p class="foot"><a href="{GH}/{slug}/lessons/{folder}/README.md">Read full lesson {n:02d} →</a></p>\n</section>\n')
 
-ALL_DSECS = "".join(dsec(n) for n in range(1,13))
+ALL_DSECS = "".join(dsec(n) for n in range(1,14))
 
 def card(n):
     _,slug,folder,title,ana,_,color = L[n-1]
@@ -240,10 +249,10 @@ INDEX = head("Learn AI the school way — tokens to agents",
 {chr(10).join(card(n) for n in range(1,8))}
   </div>
 
-  <h2 id="part2">🧰 Part 2 — using it for real (lessons 8–12)</h2>
+  <h2 id="part2">🧰 Part 2 — using it for real (lessons 8–12 + bonus 13)</h2>
   <p class="sub">No installs here either — the labs use any chatbot you already have, plus paper and honesty.</p>
   <div class="grid">
-{chr(10).join(card(n) for n in range(8,13))}
+{chr(10).join(card(n) for n in range(8,14))}
   </div>
 
   <pre><code># take the course locally:
@@ -265,7 +274,7 @@ git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
 {ALL_DSECS}
   <a class="btn" href="{GH}/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">Start Lesson 01 →</a>
   <a class="btn alt" href="study-plan.html">🗓️ Study plan (4 weeks)</a>
-  <a class="btn alt" href="lesson-diagrams.html">📐 All 12 lesson diagrams</a>
+  <a class="btn alt" href="lesson-diagrams.html">📐 All 13 lesson diagrams</a>
   <a class="btn alt" href="before-and-tradeoffs.html">⏮️ Before &amp; trade-offs</a>
 
   <footer>
@@ -285,14 +294,14 @@ DIAGRAMS = head("Lesson diagrams — Learn AI School",
 <div class="wrap">
 <header>
   <p><a href="index.html">← Back to the course home</a></p>
-  <h1>📐 The 12 lessons as diagrams</h1>
+  <h1>📐 The 13 lessons as diagrams</h1>
   <p class="sub">Part 1: inside the model (purple, 1–7) · Part 2: using it (teal, 8–12).
   Follow the circled numbers <b>1 → 2 → 3</b>.</p>
   <nav class="toc">
     <a href="#l01">1 What is AI</a><a href="#l02">2 Training</a><a href="#l03">3 Tokens</a>
     <a href="#l04">4 Embeddings</a><a href="#l05">5 Next token</a><a href="#l06">6 Attention</a>
     <a href="#l07">7 RLHF/LoRA</a><a href="#l08">8 Prompting</a><a href="#l09">9 Hallucinations</a>
-    <a href="#l10">10 RAG</a><a href="#l11">11 Agents</a><a href="#l12">12 Diffusion</a>
+    <a href="#l10">10 RAG</a><a href="#l11">11 Agents</a><a href="#l12">12 Diffusion</a><a href="#l13">13 MCP</a>
   </nav>
 </header>
 {ALL_DSECS}
@@ -343,7 +352,7 @@ TRADEOFFS = head("Before & trade-offs — Learn AI School",
   and <b>where to use it 👍 vs not 👎</b>.</p>
   <nav class="toc">
     <a href="#ml">🧠 ML vs rulebooks</a><a href="#tune">🗒️ Tune vs RAG vs prompt</a>
-    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a>
+    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a><a href="#mcp">🔌 MCP</a>
   </nav>
 </header>
 {term("ml", P1, "🧠 Machine learning (vs rulebooks) — lessons 01–02",
@@ -388,6 +397,13 @@ TRADEOFFS = head("Before & trade-offs — Learn AI School",
   ["closed: data leaves, prices/models change under you, rate limits","open: you run the GPUs (ops!), usually behind frontier quality, security patches are your job"],
   ["closed: start here — validate the product before owning infra","open: privacy mandates, huge steady volume, deep customization"],
   ["open 'to save money' at small scale — GPU ops eats the savings","closed for regulated data without a proper agreement in place"])}
+{term("mcp", P2, "🔌 MCP vs bespoke tool integrations — lesson 13",
+  "Before MCP (pre-2025)",
+  "Every AI app hand-wired every tool: one GitHub integration for the IDE, ANOTHER for the chatbot, a third for the agent — N apps × M tools = N×M adapters, none reusable. Capabilities were private wiring, not shareable parts.",
+  ["write a server once → works in every MCP host (N+M)","growing ecosystem of ready-made servers to plug in","standard discovery: models find tools at connect time","swap AI apps without rewiring your integrations"],
+  ["young standard — server quality varies wildly","each server = installed software with YOUR permissions","tool results can carry prompt injection — audit sources","local config friction (paths, env, versions) is real"],
+  ["agents/apps needing several tools, today and tomorrow","your capability should work from many AI apps","teams sharing internal tools across assistants"],
+  ["one hardcoded tool in one app — plain function calling is simpler","untrusted third-party servers on sensitive machines","a plain REST call from YOUR code does the job — no model needed"])}
 <footer>
   Learn AI School · <a href="index.html">Course home</a> ·
   <a href="lesson-diagrams.html">Lesson diagrams</a> ·
@@ -438,7 +454,7 @@ STUDY = head("Study plan — Learn AI School",
 <div class="wrap">
 <header>
   <p><a href="index.html">← Back to the course home</a></p>
-  <h1>🗓️ The study plan — 12 lessons, 4 weeks</h1>
+  <h1>🗓️ The study plan — 13 lessons, 4 weeks</h1>
   <p class="sub">~<b>3 sessions a week</b>: read the lesson (~15 min) + do its lab (~25 min).
   Tick lessons off — <b>progress is saved in this browser</b>. Watch the
   <a href="{VIDEO}">companion video</a> before Week 1 for the aerial view.</p>
@@ -468,11 +484,11 @@ STUDY = head("Study plan — Learn AI School",
   "your B-prompt visibly beats your A-prompt; you caught (and verified!) one hallucination; you know when to fine-tune vs RAG — say the rule.")}
 {week(P2,"WEEK 4","🧰 Building — open books, hall passes, static",
   "RAG by hand, being the agent's harness, diffusion probes — then the capstone.",
-  [10,11,12],
+  [10,11,12,13],
   "🏆 <b>Capstone:</b> re-watch the <a href='{VIDEO}'>companion video</a> and pause after each of the 9 concepts — explain every one in YOUR school-analogy words. Bonus: build the 30-line RAG from lesson 10 for real.")}
 
 <div id="done">
-  <h2>🎓 12 / 12 — zero magic left!</h2>
+  <h2>🎓 13 / 13 — zero magic left, sockets included!</h2>
   <p class="sub" style="margin:10px auto 0">Next: build something — or tour the rest of the school:
   <a href="https://baluraut.github.io/learn-kubernetes-school/">Kubernetes</a> ·
   <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> ·

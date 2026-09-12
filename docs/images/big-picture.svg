@@ -86,7 +86,7 @@
 
   <!-- BAND 2 -->
   <rect class="band2" x="40" y="610" width="1840" height="510" rx="20"/>
-  <text class="bandt" x="70" y="652" fill="#0d9488">🧰 PART 2 — USING IT FOR REAL (lessons 8–12)</text>
+  <text class="bandt" x="70" y="652" fill="#0d9488">🧰 PART 2 — USING IT FOR REAL (lessons 8–12 + 🔌 MCP bonus)</text>
 
   <rect class="bxt" x="70" y="700" width="340" height="140" rx="14"/>
   <text class="t m" x="240" y="733">🗣️🪑 prompting &amp; the desk</text>

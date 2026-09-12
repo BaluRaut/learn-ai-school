@@ -54,14 +54,14 @@
 <div class="wrap">
 <header>
   <p><a href="index.html">← Back to the course home</a></p>
-  <h1>📐 The 12 lessons as diagrams</h1>
+  <h1>📐 The 13 lessons as diagrams</h1>
   <p class="sub">Part 1: inside the model (purple, 1–7) · Part 2: using it (teal, 8–12).
   Follow the circled numbers <b>1 → 2 → 3</b>.</p>
   <nav class="toc">
     <a href="#l01">1 What is AI</a><a href="#l02">2 Training</a><a href="#l03">3 Tokens</a>
     <a href="#l04">4 Embeddings</a><a href="#l05">5 Next token</a><a href="#l06">6 Attention</a>
     <a href="#l07">7 RLHF/LoRA</a><a href="#l08">8 Prompting</a><a href="#l09">9 Hallucinations</a>
-    <a href="#l10">10 RAG</a><a href="#l11">11 Agents</a><a href="#l12">12 Diffusion</a>
+    <a href="#l10">10 RAG</a><a href="#l11">11 Agents</a><a href="#l12">12 Diffusion</a><a href="#l13">13 MCP</a>
   </nav>
 </header>
 
@@ -171,6 +171,15 @@
   <svg viewBox="0 0 940 305" role="img"><rect class="soft" x="40" y="40" width="400" height="110" rx="12"/><text class="t m" x="240" y="66">🎨 homework, millions of times</text><rect class="box" x="60" y="80" width="110" height="55" rx="10"/><text class="s m" x="115" y="105">🐱 photo</text><text class="s m" x="115" y="125">+noise ×1000</text><rect class="box" x="200" y="80" width="100" height="55" rx="10"/><text class="s m" x="250" y="112">📺 static</text><rect class="box" x="320" y="80" width="100" height="55" rx="10"/><text class="s m" x="370" y="105">learn: predict</text><text class="s m" x="370" y="125">the noise</text><line class="arr" x1="170" y1="107" x2="196" y2="107"/><line class="arr" x1="300" y1="107" x2="316" y2="107"/><rect class="box" x="40" y="190" width="130" height="80" rx="12"/><text class="t m" x="105" y="222">📺 pure</text><text class="t m" x="105" y="244">static</text><rect class="box" x="240" y="190" width="270" height="80" rx="12"/><text class="t m" x="375" y="218">🌀 un-noise ×20-50 steps</text><text class="s m" x="375" y="244">prompt&#39;s meaning-seat (L04) steers each step</text><rect class="box" x="580" y="190" width="150" height="80" rx="12"/><text class="t m" x="655" y="222">🐱👑 &#39;cat with</text><text class="t m" x="655" y="244">a crown&#39;</text><line class="arr" x1="170" y1="230" x2="236" y2="230"/><g transform="translate(203,213)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="510" y1="230" x2="576" y2="230"/><g transform="translate(543,213)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="soft" x="760" y="150" width="150" height="140" rx="12"/><text class="s m" x="835" y="180">👀 multimodal:</text><text class="s m" x="835" y="202">images/audio</text><text class="s m" x="835" y="224">become tokens too —</text><text class="s m" x="835" y="246">same desk, same</text><text class="s m" x="835" y="268">attention (L03/L06)</text><g transform="translate(760,150)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g>
   </svg>
   <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-12-diffusion/lessons/12-diffusion/README.md">Read full lesson 12 →</a></p>
+</section>
+
+<!-- 13 -->
+<section class="dsec" id="l13" style="--c:#0d9488">
+  <h2><span class="ln">13</span> 🔌 Bonus: MCP</h2>
+  <p class="d">The universal plug — any tool into any AI app, one standard socket.</p>
+  <svg viewBox="0 0 940 305" role="img"><rect class="dead" x="40" y="40" width="250" height="100" rx="12"/><text class="t m" x="165" y="72">🍝 before MCP</text><text class="s m" x="165" y="96">every app × every tool =</text><text class="s m" x="165" y="118">a hand-built adapter (N×M)</text><rect class="box" x="360" y="40" width="250" height="100" rx="12"/><text class="t m" x="485" y="70">🏫 hosts - the rooms</text><text class="s m" x="485" y="94">Claude Desktop · IDE ·</text><text class="s m" x="485" y="116">your agent — standard sockets 🔌</text><rect class="box" x="680" y="40" width="230" height="100" rx="12"/><text class="t m" x="795" y="70">🔬 MCP servers</text><text class="s m" x="795" y="94">files · GitHub · your DB —</text><text class="s m" x="795" y="116">standard plugs</text><line class="arr" x1="290" y1="90" x2="356" y2="90"/><g transform="translate(323,73)"><circle r="11" class="nc"/><text class="nt" dy="4">1</text></g><line class="arr" x1="610" y1="90" x2="676" y2="90"/><g transform="translate(643,73)"><circle r="11" class="nc"/><text class="nt" dy="4">2</text></g><rect class="box" x="150" y="180" width="640" height="60" rx="12"/><text class="t m" x="470" y="205">each server announces: my TOOLS 🧰 · my RESOURCES 📁 · my PROMPTS 📜</text><text class="s m" x="470" y="227">discover (tools/list) → call (tools/call) → result lands on the desk — L11&#39;s loop, standardized</text><line class="arr" x1="470" y1="140" x2="470" y2="176"/><g transform="translate(450,158)"><circle r="11" class="nc"/><text class="nt" dy="4">3</text></g><rect class="soft" x="150" y="255" width="640" height="40" rx="10"/><text class="s m" x="470" y="280">🚧 a server runs with YOUR permissions — installing one = installing software; L11 guardrails apply double</text><g transform="translate(150,255)"><circle r="11" class="nc"/><text class="nt" dy="4">4</text></g>
+  </svg>
+  <p class="foot"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-13-mcp/lessons/13-mcp/README.md">Read full lesson 13 →</a></p>
 </section>
 
 <footer>

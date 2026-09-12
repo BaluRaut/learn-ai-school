@@ -19,7 +19,7 @@ of every concept it names (agents, RAG, tokenization, RLHF, diffusion, LoRA…).
 
 ![The big picture: inside the model, then using it for real](docs/images/big-picture-4k.png)
 
-## 🎓 The 12 lessons
+## 🎓 The 13 lessons (12 core + 1 bonus)
 
 Each numbered branch adds ONE lesson folder (`lessons/NN-topic/README.md`) with an
 explain-like-I'm-5 story, a school analogy, a diagram, **What / Why / How**, and a hands-on
@@ -52,6 +52,7 @@ git checkout lesson-02-training      # ...keep going, one branch at a time
 | 10 | `lesson-10-rag` | Retrieval-Augmented Generation | The open-book exam 📖 |
 | 11 | `lesson-11-agents` | Agents & tool use | A student with a to-do list and a hall pass 📋 |
 | 12 | `lesson-12-diffusion` | Diffusion & multimodal models | Un-blurring TV static, step by step 📺 |
+| 13 | `lesson-13-mcp` | **Bonus:** MCP — the Model Context Protocol | The universal plug for AI tools 🔌 |
 
 ## 📦 What's in this repo (main branch)
 

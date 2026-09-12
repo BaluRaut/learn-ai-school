@@ -57,7 +57,7 @@
   and <b>where to use it 👍 vs not 👎</b>.</p>
   <nav class="toc">
     <a href="#ml">🧠 ML vs rulebooks</a><a href="#tune">🗒️ Tune vs RAG vs prompt</a>
-    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a>
+    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a><a href="#mcp">🔌 MCP</a>
   </nav>
 </header>
 
@@ -124,6 +124,17 @@
     <div class="q demerit"><h4>❌ Demerits</h4><ul><li>closed: data leaves, prices/models change under you, rate limits</li><li>open: you run the GPUs (ops!), usually behind frontier quality, security patches are your job</li></ul></div>
     <div class="q use"><h4>👍 Use when</h4><ul><li>closed: start here — validate the product before owning infra</li><li>open: privacy mandates, huge steady volume, deep customization</li></ul></div>
     <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>open 'to save money' at small scale — GPU ops eats the savings</li><li>closed for regulated data without a proper agreement in place</li></ul></div>
+  </div>
+</section>
+
+<section class="term" id="mcp" style="--c:#0d9488">
+  <h2>🔌 MCP vs bespoke tool integrations — lesson 13</h2>
+  <div class="hist"><b>⏮️ Before MCP (pre-2025)</b><p>Every AI app hand-wired every tool: one GitHub integration for the IDE, ANOTHER for the chatbot, a third for the agent — N apps × M tools = N×M adapters, none reusable. Capabilities were private wiring, not shareable parts.</p></div>
+  <div class="quad">
+    <div class="q merit"><h4>✅ Merits</h4><ul><li>write a server once → works in every MCP host (N+M)</li><li>growing ecosystem of ready-made servers to plug in</li><li>standard discovery: models find tools at connect time</li><li>swap AI apps without rewiring your integrations</li></ul></div>
+    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>young standard — server quality varies wildly</li><li>each server = installed software with YOUR permissions</li><li>tool results can carry prompt injection — audit sources</li><li>local config friction (paths, env, versions) is real</li></ul></div>
+    <div class="q use"><h4>👍 Use when</h4><ul><li>agents/apps needing several tools, today and tomorrow</li><li>your capability should work from many AI apps</li><li>teams sharing internal tools across assistants</li></ul></div>
+    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>one hardcoded tool in one app — plain function calling is simpler</li><li>untrusted third-party servers on sensitive machines</li><li>a plain REST call from YOUR code does the job — no model needed</li></ul></div>
   </div>
 </section>
 <footer>
