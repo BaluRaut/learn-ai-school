@@ -262,7 +262,7 @@ cd learn-ai-school
 python3 demo/bigram_model.py            # a language model in 60 seconds
 git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
 
-  <div class="callout">🔌 <b>Went deep on lesson 13?</b> There is now a whole <a href="https://baluraut.github.io/learn-mcp-school/">MCP school</a> — with a real server &amp; client in the repo and 5 use cases with sequence diagrams. And for lesson 11: the <a href="https://baluraut.github.io/learn-agents-school/">Agents school</a> — a runnable agent, guardrails, failure modes, and 5 patterns.</div>
+  <div class="callout">🔌 <b>Went deep on lesson 13?</b> There is now a whole <a href="https://baluraut.github.io/learn-mcp-school/">MCP school</a> — with a real server &amp; client in the repo and 5 use cases with sequence diagrams. And for lesson 11: the <a href="https://baluraut.github.io/learn-agents-school/">Agents school</a> — a runnable agent, guardrails, failure modes, and 5 patterns. And for lessons 04 &amp; 10: the <a href="https://baluraut.github.io/learn-vectordb-school/">VectorDB school</a> — a runnable mini vector database and the RAG machine room.</div>
 
   <div class="callout">🎓 <b>From the same school:</b>
     <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> ·
