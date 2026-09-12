@@ -52,7 +52,7 @@ git checkout lesson-02-training      # ...keep going, one branch at a time
 | 10 | `lesson-10-rag` | Retrieval-Augmented Generation | The open-book exam 📖 |
 | 11 | `lesson-11-agents` | Agents & tool use | A student with a to-do list and a hall pass 📋 |
 | 12 | `lesson-12-diffusion` | Diffusion & multimodal models | Un-blurring TV static, step by step 📺 |
-| 13 | `lesson-13-mcp` | **Bonus:** MCP — the Model Context Protocol | The universal plug for AI tools 🔌 |
+| 13 | `lesson-13-mcp` | **Bonus:** MCP — the Model Context Protocol ([deep-dive course →](https://github.com/BaluRaut/learn-mcp-school)) | The universal plug for AI tools 🔌 |
 
 ## 📦 What's in this repo (main branch)
 

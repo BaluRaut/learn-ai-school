@@ -18,7 +18,7 @@ L = [  # num, slug, folder, title, analogy, minutes, color
  (10,"lesson-10-rag","10-rag","📖 RAG","The open-book exam, automated with the seating chart.",45,P2),
  (11,"lesson-11-agents","11-agents","📋 Agents &amp; tools","A student with a to-do list and a hall pass.",45,P2),
  (12,"lesson-12-diffusion","12-diffusion","📺 Diffusion &amp; multimodal","Un-blurring TV static, step by step, toward your words.",40,P2),
- (13,"lesson-13-mcp","13-mcp","🔌 Bonus: MCP","The universal plug — any tool into any AI app, one standard socket.",40,P2),
+ (13,"lesson-13-mcp","13-mcp","🔌 Bonus: MCP","The universal plug — deep-dive course: <a href=&quot;https://baluraut.github.io/learn-mcp-school/&quot;>learn-mcp-school</a> 🔌",40,P2),
 ]
 
 BASE_CSS = """
@@ -260,6 +260,8 @@ git clone https://github.com/BaluRaut/learn-ai-school.git
 cd learn-ai-school
 python3 demo/bigram_model.py            # a language model in 60 seconds
 git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
+
+  <div class="callout">🔌 <b>Went deep on lesson 13?</b> There is now a whole <a href="https://baluraut.github.io/learn-mcp-school/">MCP school</a> — with a real server &amp; client in the repo and 5 use cases with sequence diagrams.</div>
 
   <div class="callout">🎓 <b>From the same school:</b>
     <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> ·
