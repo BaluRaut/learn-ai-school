@@ -284,7 +284,9 @@ git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
     Learn AI School · zero magic left ·
     <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a> ·
     companion video: <a href="{VIDEO}">ByteByteAI — 9 AI Concepts</a>
-  </footer>
+   ·
+  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+</footer>
 
 </div>
 </body>
@@ -311,6 +313,8 @@ DIAGRAMS = head("Lesson diagrams — Learn AI School",
 <footer>
   Learn AI School · <a href="index.html">Course home</a> ·
   <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
+ ·
+  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
 </footer>
 </div>
 </body>
@@ -411,6 +415,8 @@ TRADEOFFS = head("Before & trade-offs — Learn AI School",
   Learn AI School · <a href="index.html">Course home</a> ·
   <a href="lesson-diagrams.html">Lesson diagrams</a> ·
   <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
+ ·
+  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
 </footer>
 </div>
 </body>
@@ -502,6 +508,8 @@ STUDY = head("Study plan — Learn AI School",
 <footer>
   Learn AI School · <a href="index.html">Course home</a> ·
   <a href="https://github.com/BaluRaut/learn-ai-school">GitHub</a>
+ ·
+  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
 </footer>
 </div>
 <script>
