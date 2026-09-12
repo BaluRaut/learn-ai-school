@@ -1,6 +1,6 @@
 # 📺 Lesson 12 — Diffusion & multimodal: un-blurring the TV static
 
-**📍 You are here:** Lesson **12** of 12 — the final lesson! · Previous: `lesson-11-agents`
+**📍 You are here:** Lesson **12** of 12 · Previous: `lesson-11-agents` · Bonus next: `lesson-13-mcp`
 
 ---
 
@@ -93,6 +93,9 @@ hall passes → un-blurring static. **Twelve lessons, five core ideas,
 zero magic left.** Go build something — and when the next AI headline
 drops, you'll know exactly which lesson it's wearing. 🧠🎓
 
+One bonus remains: the standard plug that connects all of this to your
+files, your GitHub, your database — **MCP**.
+
 ```bash
-git checkout main
+git checkout lesson-13-mcp   # 🔌 the universal plug
 ```
