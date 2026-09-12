@@ -72,7 +72,7 @@ TOC_CSS = """
 def head(title, desc, extra=""):
     return (f'<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
       f'<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>{title}</title>\n'
-      f'<meta name="description" content="{desc}">\n<style>{BASE_CSS}{extra}</style>\n</head>\n<body>\n')
+      f'<meta name="description" content="{desc}">\n<meta property="og:title" content="{title}">\n<meta property="og:description" content="{desc}">\n<meta property="og:image" content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png">\n<meta property="og:type" content="website">\n<meta name="twitter:card" content="summary_large_image">\n<style>{BASE_CSS}{extra}</style>\n</head>\n<body>\n')
 
 B='<rect class="box"'; S='<rect class="soft"'; D='<rect class="dead"'; DASH=' dash'
 def t(x,y,s): return f'<text class="t m" x="{x}" y="{y}">{s}</text>'
@@ -278,6 +278,7 @@ git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
   <a class="btn" href="{GH}/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">Start Lesson 01 →</a>
   <a class="btn alt" href="study-plan.html">🗓️ Study plan (4 weeks)</a>
   <a class="btn alt" href="lesson-diagrams.html">📐 All 13 lesson diagrams</a>
+  <a class="btn alt" href="quiz.html">🧪 Quiz</a>
   <a class="btn alt" href="before-and-tradeoffs.html">⏮️ Before &amp; trade-offs</a>
 
   <footer>
@@ -286,6 +287,8 @@ git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
     companion video: <a href="{VIDEO}">ByteByteAI — 9 AI Concepts</a>
    ·
   <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+ ·
+  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
 </footer>
 
 </div>
@@ -315,6 +318,8 @@ DIAGRAMS = head("Lesson diagrams — Learn AI School",
   <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
  ·
   <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+ ·
+  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
 </footer>
 </div>
 </body>
@@ -417,6 +422,8 @@ TRADEOFFS = head("Before & trade-offs — Learn AI School",
   <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
  ·
   <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+ ·
+  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
 </footer>
 </div>
 </body>
@@ -510,6 +517,8 @@ STUDY = head("Study plan — Learn AI School",
   <a href="https://github.com/BaluRaut/learn-ai-school">GitHub</a>
  ·
   <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+ ·
+  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
 </footer>
 </div>
 <script>

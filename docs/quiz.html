@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz — 🧠 AI</title>
+<meta name="description" content="Self-test quiz for the 🧠 AI school — 10 questions with explanations.">
+<meta property="og:title" content="Quiz — 🧠 AI"><meta property="og:description" content="10 questions with explanations. Can you pass?"><meta property="og:image" content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
+<style>
+:root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --bad:#dc2626; --blue:#2563eb; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--ink); font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; line-height:1.6; }
+.wrap { max-width:900px; margin:0 auto; padding:28px 20px 60px; }
+a { color:var(--blue); } h1 { font-size:1.9rem; }
+.sub { color:var(--muted); }
+.scorebox { position:sticky; top:0; background:var(--bg); padding:10px 0; z-index:5; }
+.score { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:10px 16px; font-weight:700; }
+.qcard { background:var(--card); border:1px solid var(--line); border-left:6px solid var(--accent); border-radius:14px; padding:18px 20px; margin-top:16px; }
+.qcard h3 { font-size:1.02rem; margin-bottom:10px; }
+.opt { display:block; width:100%; text-align:left; margin-top:8px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); font:inherit; cursor:pointer; }
+.opt:hover { border-color:var(--accent); }
+.opt.right { border-color:var(--ok); background:color-mix(in srgb, var(--ok) 12%, var(--bg)); }
+.opt.wrong { border-color:var(--bad); background:color-mix(in srgb, var(--bad) 12%, var(--bg)); }
+.why { display:none; margin-top:10px; color:var(--muted); font-size:.92rem; border-top:1px dashed var(--line); padding-top:8px; }
+.reset { margin-top:20px; background:var(--accent); color:#fff; border:none; border-radius:10px; padding:10px 18px; font:inherit; font-weight:700; cursor:pointer; }
+footer { margin-top:44px; border-top:1px solid var(--line); padding-top:16px; color:var(--muted); font-size:.88rem; }
+</style></head><body><div class="wrap">
+<p><a href="index.html">← Back to the course home</a></p>
+<h1>🧪 The 🧠 AI quiz</h1>
+<p class="sub">10 questions — pick an answer, get the why. One attempt per question (until reset).
+Your best score is saved in this browser.</p>
+<div class="scorebox"><div class="score" id="score">0 / 10 · best: —</div></div>
+<div id="quiz"></div>
+<button class="reset" onclick="reset()">↺ Reset & retake</button>
+<footer>Part of <a href="https://baluraut.github.io/school/">🏫 The School</a> · <a href="index.html">course home</a></footer>
+</div>
+<script>
+var QS = [{"q": "An LLM's one actual job?", "o": ["Understand grammar", "Predict the next token, repeatedly", "Query a knowledge database"], "c": 1, "w": "L05: the sentence-completion game — everything else emerges from it."}, {"q": "Temperature ≈ 0 gives you…", "o": ["Smarter answers", "The most likely token every time — consistent, safe", "Faster responses"], "c": 1, "w": "L05: the dial trades safety for adventure; code wants ~0."}, {"q": "Why is 'count the R's in strawberry' hard?", "o": ["Models can't count at all", "It sees learned token-pieces, never letters", "Berries are ambiguous"], "c": 1, "w": "L03: [st][raw][berry]-ish IDs — the sensory system has no letters."}, {"q": "Embeddings are…", "o": ["Compression", "Meaning as coordinates — similar meanings sit close", "Encryption"], "c": 1, "w": "L04: the seating chart; distance = similarity powers search and RAG."}, {"q": "What does attention do?", "o": ["Speeds up training", "Lets each token weigh every other token — 'it' → robot 65%", "Filters bad words"], "c": 1, "w": "L06: weighted glancing, many heads, many layers."}, {"q": "RLHF in one line?", "o": ["More data", "Humans pick better answers → a taste-judge → the model gets nudged toward it", "Bigger context"], "c": 1, "w": "L07: gold stars — where helpfulness AND sycophancy come from."}, {"q": "LoRA is…", "o": ["A new model", "Tiny trainable add-on notes on a frozen model (~0.1%)", "A prompt format"], "c": 1, "w": "L07: sticky notes — cheap, swappable personalization."}, {"q": "New company facts should come from…", "o": ["Fine-tuning", "RAG — facts on the desk; tune for style, not facts", "A bigger model"], "c": 1, "w": "L10: the rule of rules — facts→RAG, style→tune."}, {"q": "Why do models hallucinate?", "o": ["Bugs", "Trained for plausibility — truth was never in the loss", "Not enough RAM"], "c": 1, "w": "L09: the confident kid; defenses are open-book, receipts, permission to not know."}, {"q": "The context window is best thought of as…", "o": ["Long-term memory", "The desk — everything must fit; oldest pages slide off", "A cache"], "c": 1, "w": "L08: no desk, no existence; 'memory' is the app re-pasting notes."}];
+var KEY='quiz-ai-school', answered={}, score=0;
+var best = parseInt(localStorage.getItem(KEY)||'-1');
+function render() {
+  var el = document.getElementById('quiz'); el.innerHTML='';
+  QS.forEach(function(q,i) {
+    var card=document.createElement('div'); card.className='qcard';
+    card.innerHTML='<h3>'+(i+1)+'. '+q.q+'</h3>';
+    q.o.forEach(function(opt,j) {
+      var b=document.createElement('button'); b.className='opt'; b.textContent=opt;
+      b.onclick=function() {
+        if (answered[i]!==undefined) return;
+        answered[i]=j;
+        if (j===q.c) { b.classList.add('right'); score++; }
+        else { b.classList.add('wrong'); card.querySelectorAll('.opt')[q.c].classList.add('right'); }
+        card.querySelector('.why').style.display='block';
+        update();
+      };
+      card.appendChild(b);
+    });
+    var why=document.createElement('div'); why.className='why'; why.textContent='💡 '+q.w;
+    card.appendChild(why);
+    el.appendChild(card);
+  });
+}
+function update() {
+  var done=Object.keys(answered).length;
+  if (done===QS.length && score>best) { best=score; localStorage.setItem(KEY,best); }
+  document.getElementById('score').textContent=score+' / '+QS.length+(done===QS.length?' — done! 🎓':'')+' · best: '+(best<0?'—':best+'/'+QS.length);
+}
+function reset() { answered={}; score=0; render(); update(); }
+render(); update();
+</script></body></html>
