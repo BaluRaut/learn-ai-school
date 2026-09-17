@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="mr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Before & trade-offs — Learn AI School</title>
-<meta name="description" content="For every big AI idea: what the world looked like before it, its merits and demerits, and where to use it vs where not.">
-<meta property="og:title" content="Before & trade-offs — Learn AI School">
-<meta property="og:description" content="For every big AI idea: what the world looked like before it, its merits and demerits, and where to use it vs where not.">
-<meta property="og:image" content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-en="Before &amp;amp; trade-offs — Learn AI School">आधी काय होते &amp; फायदे-तोटे — Learn AI School</title>
+<meta content="For every big AI idea: what the world looked like before it, its merits and demerits, and where to use it vs where not." name="description"/>
+<meta content="Before &amp; trade-offs — Learn AI School" property="og:title"/>
+<meta content="For every big AI idea: what the world looked like before it, its merits and demerits, and where to use it vs where not." property="og:description"/>
+<meta content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="summary_large_image" name="twitter:card"/>
 <style>
   :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --blue:#2563eb; --bad:#dc2626; }
   @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
@@ -51,107 +52,123 @@
   .toc a { border:1px solid var(--line); background:var(--card); border-radius:999px; padding:5px 12px; font-size:.82rem; color:var(--muted); text-decoration:none; }
   .toc a:hover { color:var(--ink); border-color:var(--muted); }
 </style>
-</head>
-<body>
 
+<style id="i18n-css">
+#lang-pick{position:fixed;top:10px;right:10px;z-index:9999;font:600 .85rem -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--card,#fff);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:6px 12px;box-shadow:0 2px 10px rgba(0,0,0,.08);cursor:pointer}
+html[lang="mr"] body{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+html[lang="mr"] svg text{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",sans-serif}
+@media print{#lang-pick{display:none}}
+</style></head>
+<body><select aria-label="Language / भाषा" id="lang-pick" onchange="schoolSetLang(this.value)">
+<option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select>
 <div class="wrap">
 <header>
-  <p><a href="index.html">← Back to the course home</a></p>
-  <h1>⏮️ Before &amp; trade-offs</h1>
-  <p class="sub">Every tool replaced something worse — and is itself the wrong tool somewhere.
-  For each big idea: what life was like <b>before</b>, honest <b>merits ✅ / demerits ❌</b>,
-  and <b>where to use it 👍 vs not 👎</b>.</p>
-  <nav class="toc">
-    <a href="#ml">🧠 ML vs rulebooks</a><a href="#tune">🗒️ Tune vs RAG vs prompt</a>
-    <a href="#rag">📖 RAG</a><a href="#agents">📋 Agents</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open vs closed</a><a href="#mcp">🔌 MCP</a>
-  </nav>
+<p data-en='&lt;a href="index.html"&gt;← Back to the course home&lt;/a&gt;'><a href="index.html">← कोर्सच्या मुख्य पानाकडे परत</a></p>
+<h1 data-en="⏮️ Before &amp;amp; trade-offs">⏮️ आधी काय होते &amp; फायदे-तोटे</h1>
+<p class="sub" data-en="Every tool replaced something worse — and is itself the wrong tool somewhere.
+  For each big idea: what life was like &lt;b&gt;before&lt;/b&gt;, honest &lt;b&gt;merits ✅ / demerits ❌&lt;/b&gt;,
+  and &lt;b&gt;where to use it 👍 vs not 👎&lt;/b&gt;.">प्रत्येक साधनाने काहीतरी वाईट गोष्ट बदलली — आणि तेच साधन कुठेतरी चुकीचे ठरते. प्रत्येक मोठ्या कल्पनेसाठी: <b>आधी</b> जीवन कसे होते, प्रामाणिक <b>फायदे ✅ / तोटे ❌</b>, आणि <b>कुठे वापरावी 👍 विरुद्ध कुठे नाही 👎</b>.</p>
+<nav class="toc" data-en='
+&lt;a href="#ml"&gt;🧠 ML vs rulebooks&lt;/a&gt;&lt;a href="#tune"&gt;🗒️ Tune vs RAG vs prompt&lt;/a&gt;
+&lt;a href="#rag"&gt;📖 RAG&lt;/a&gt;&lt;a href="#agents"&gt;📋 Agents&lt;/a&gt;&lt;a href="#diffusion"&gt;📺 Diffusion&lt;/a&gt;&lt;a href="#openclosed"&gt;🔓 Open vs closed&lt;/a&gt;&lt;a href="#mcp"&gt;🔌 MCP&lt;/a&gt;
+'><a href="#ml">🧠 ML विरुद्ध नियमपुस्तके</a><a href="#tune">🗒️ Tune विरुद्ध RAG विरुद्ध prompt</a> <a href="#rag">📖 RAG</a><a href="#agents">📋 एजंट्स</a><a href="#diffusion">📺 Diffusion</a><a href="#openclosed">🔓 Open विरुद्ध closed</a><a href="#mcp">🔌 MCP</a></nav>
 </header>
-
 <section class="term" id="ml" style="--c:#7c3aed">
-  <h2>🧠 Machine learning (vs rulebooks) — lessons 01–02</h2>
-  <div class="hist"><b>⏮️ Before ML took over (pre-2012 for vision, pre-2020 for language)</b><p>Software was rulebooks: expert systems, thousands of hand-written if-thens, brittle grammar engines. Spam filters listed bad words; translators stored phrase tables. Anything fuzzy — images, speech, natural language — stayed embarrassingly bad, because some rules simply cannot be written.</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>handles what rulebooks never could: fuzz, ambiguity, perception</li><li>improves with data instead of with more if-statements</li><li>one method spans images, speech, text, code</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>rules are grown → hard to inspect or fully explain</li><li>inherits its data's gaps and biases</li><li>fails weirdly (stickers fool it), not gracefully</li><li>training costs compute; behavior isn't guaranteed</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>patterns beyond writable rules: language, vision, recommendation</li><li>'roughly right, usually' is acceptable and checkable</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>exact auditable logic: payroll, tax, safety interlocks — write code!</li><li>tiny data, huge stakes, no tolerance for surprises</li><li>a regex would do — the boring tool is allowed to win 😄</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="tune" style="--c:#7c3aed">
-  <h2>🗒️ Fine-tuning &amp; LoRA vs RAG vs prompting — lessons 07, 08, 10</h2>
-  <div class="hist"><b>⏮️ Before this decision tree existed (~2022)</b><p>If you wanted a model to know or behave differently, the only lever was full retraining — museum-budget territory. Today there are three ladders, and picking wrong burns months: prompting (free, per-request), RAG (fresh facts on the desk), fine-tuning/LoRA (bake in style).</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>prompting: instant, free, reversible — always try FIRST</li><li>RAG: fresh + auditable facts, update = re-index tonight</li><li>LoRA: real style/format/domain-voice gains on one GPU</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>prompting can't add knowledge or unbreakable habits</li><li>RAG lives and dies by retrieval quality (garbage in…)</li><li>tuning: costs, drifts stale, and CANNOT reliably add facts</li><li>teams routinely fine-tune when a better prompt would have done</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>order of operations: prompt → RAG for facts → tune for style</li><li>tune when format/tone must be deep and consistent (and prompts maxed out)</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>'let's fine-tune so it knows our docs' — that's RAG's job, always</li><li>before you've even written a decent system prompt</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="rag" style="--c:#0d9488">
-  <h2>📖 RAG — lesson 10</h2>
-  <div class="hist"><b>⏮️ Before RAG (pre-2023 for most teams)</b><p>Company knowledge lived behind keyword search (exact-word-or-nothing), hand-curated FAQ bots that answered 12 questions, and 'ask Priya, she knows where the doc is'. Models answered company questions closed-book — i.e., they made things up (lesson 09).</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>grounded answers with citations — hallucination's best antidote</li><li>knowledge updates nightly (re-index), no retraining</li><li>semantic: finds meaning, not just matching words</li><li>per-question cost is pennies</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>a real pipeline to build and monitor (chunking, top-k, rerank)</li><li>retrieval misses → confident closed-book nonsense returns</li><li>struggles with cross-document reasoning ('compare all 50 contracts')</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>chat-with-your-docs, support bots, policy Q&amp;A — the classic wins</li><li>answers must cite sources (compliance loves RAG)</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>the whole corpus fits comfortably on the desk — just paste it</li><li>questions need global aggregation, not lookup → databases/BI</li><li>your documents are wrong — RAG faithfully cites garbage 😅</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="agents" style="--c:#0d9488">
-  <h2>📋 Agents &amp; tool use — lesson 11</h2>
-  <div class="hist"><b>⏮️ Before agents (~2023)</b><p>Automation meant brittle scripts and RPA bots that clicked pixel coordinates and shattered when a button moved. Chatbots could only TALK — every actual action returned to a human. The glue between 'model suggests' and 'something happens' was always a person.</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>turns advice into outcomes: looks things up, files, fixes, retries</li><li>handles fuzzy multi-step goals scripts never could</li><li>recovers from surprises by re-planning (scripts just crash)</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>errors compound step by step — confidently wrong, with momentum</li><li>harder to test: same goal, different paths each run</li><li>token costs multiply (every think-act-look loop bills)</li><li>real permissions = real blast radius — guardrails are NOT optional</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>multi-step work with verifiable outcomes (tests pass, ticket filed)</li><li>read-heavy research/triage where a human signs the final act</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>one deterministic step — a plain API call is faster and safer</li><li>irreversible actions without human gates (payments, deletes, sends)</li><li>you can't yet MEASURE task success — build evals first</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="diffusion" style="--c:#0d9488">
-  <h2>📺 Diffusion image generation — lesson 12</h2>
-  <div class="hist"><b>⏮️ Before diffusion (~2021)</b><p>Custom visuals meant stock-photo hunting, commissioning designers for every variant, or GANs — impressive but unstable to train and hard to steer with text. 'A cat astronaut in watercolor' was a commission, not a sentence.</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>any describable image in seconds; iterate by editing the sentence</li><li>steerable: style, composition, edits (inpainting), consistent characters</li><li>the same recipe scales to video and audio</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>text inside images is letter-SHAPES (L03's revenge) — often gibberish</li><li>global constraints wobble: fingers, symmetry, object counts</li><li>training-data provenance and copyright remain contested</li><li>photoreal fakes demand disclosure norms — use them</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>concepts, moods, storyboards, illustrations, product mockups</li><li>volume + iteration beat pixel-perfect fidelity</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>brand-exact detail (logos, UI text) — designers still win</li><li>factual/technical figures (use real charts! — dataviz, not vibes)</li><li>anything passing off generated people/events as real</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="openclosed" style="--c:#0d9488">
-  <h2>🔓 Open-weights vs closed API models</h2>
-  <div class="hist"><b>⏮️ Before the choice existed (~2023)</b><p>Frontier AI = a handful of closed APIs, take it or leave it. Then LLaMA-family leaks and releases created a genuine second lane: download the weights, run them yourself, tune them freely (LoRA, L07). Now every team faces the build-vs-rent question AWS taught you (EC2 course!) — for brains.</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>closed API: frontier quality, zero ops, pay-per-token</li><li>open weights: data stays home, cost-per-token can plummet at scale, tune anything, no vendor veto</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>closed: data leaves, prices/models change under you, rate limits</li><li>open: you run the GPUs (ops!), usually behind frontier quality, security patches are your job</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>closed: start here — validate the product before owning infra</li><li>open: privacy mandates, huge steady volume, deep customization</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>open 'to save money' at small scale — GPU ops eats the savings</li><li>closed for regulated data without a proper agreement in place</li></ul></div>
-  </div>
-</section>
-
-<section class="term" id="mcp" style="--c:#0d9488">
-  <h2>🔌 MCP vs bespoke tool integrations — lesson 13</h2>
-  <div class="hist"><b>⏮️ Before MCP (pre-2025)</b><p>Every AI app hand-wired every tool: one GitHub integration for the IDE, ANOTHER for the chatbot, a third for the agent — N apps × M tools = N×M adapters, none reusable. Capabilities were private wiring, not shareable parts.</p></div>
-  <div class="quad">
-    <div class="q merit"><h4>✅ Merits</h4><ul><li>write a server once → works in every MCP host (N+M)</li><li>growing ecosystem of ready-made servers to plug in</li><li>standard discovery: models find tools at connect time</li><li>swap AI apps without rewiring your integrations</li></ul></div>
-    <div class="q demerit"><h4>❌ Demerits</h4><ul><li>young standard — server quality varies wildly</li><li>each server = installed software with YOUR permissions</li><li>tool results can carry prompt injection — audit sources</li><li>local config friction (paths, env, versions) is real</li></ul></div>
-    <div class="q use"><h4>👍 Use when</h4><ul><li>agents/apps needing several tools, today and tomorrow</li><li>your capability should work from many AI apps</li><li>teams sharing internal tools across assistants</li></ul></div>
-    <div class="q avoid"><h4>👎 Think twice when</h4><ul><li>one hardcoded tool in one app — plain function calling is simpler</li><li>untrusted third-party servers on sensitive machines</li><li>a plain REST call from YOUR code does the job — no model needed</li></ul></div>
-  </div>
-</section>
-<footer>
-  Learn AI School · <a href="index.html">Course home</a> ·
-  <a href="lesson-diagrams.html">Lesson diagrams</a> ·
-  <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a>
- ·
-  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
- ·
-  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
-</footer>
+<h2 data-en="🧠 Machine learning (vs rulebooks) — lessons 01–02">🧠 Machine learning (विरुद्ध नियमपुस्तके) — धडे 01–02</h2>
+<div class="hist"><b data-en="⏮️ Before ML took over (pre-2012 for vision, pre-2020 for language)">⏮️ ML ने ताबा घेण्याआधी (दृश्यांसाठी 2012 पूर्वी, भाषेसाठी 2020 पूर्वी)</b><p data-en="Software was rulebooks: expert systems, thousands of hand-written if-thens, brittle grammar engines. Spam filters listed bad words; translators stored phrase tables. Anything fuzzy — images, speech, natural language — stayed embarrassingly bad, because some rules simply cannot be written.">सॉफ्टवेअर म्हणजे नियमपुस्तके: expert systems, हजारो हाताने लिहिलेले if-then, ठिसूळ व्याकरण इंजिने. Spam filters वाईट शब्दांची यादी करत; भाषांतरक phrase tables साठवत. जे काही धूसर — प्रतिमा, आवाज, नैसर्गिक भाषा — ते लाजिरवाणे वाईट राहिले, कारण काही नियम लिहिताच येत नाहीत.</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="handles what rulebooks never could: fuzz, ambiguity, perception">नियमपुस्तके कधीच हाताळू शकली नाहीत ते हाताळते: धूसरपणा, संदिग्धता, आकलन</li><li data-en="improves with data instead of with more if-statements">जास्त if-statements ऐवजी डेटाने सुधारते</li><li data-en="one method spans images, speech, text, code">एक पद्धत प्रतिमा, आवाज, मजकूर, कोड सगळे व्यापते</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="rules are grown → hard to inspect or fully explain">नियम वाढवलेले असतात → तपासणे किंवा पूर्ण समजावणे अवघड</li><li data-en="inherits its data's gaps and biases">डेटातील त्रुटी आणि पूर्वग्रह वारशाने घेते</li><li data-en="fails weirdly (stickers fool it), not gracefully">विचित्र पद्धतीने फसते (स्टिकर फसवतात), सुबकपणे नाही</li><li data-en="training costs compute; behavior isn't guaranteed">training ला compute लागते; वर्तनाची हमी नाही</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="patterns beyond writable rules: language, vision, recommendation">लिहिता येणाऱ्या नियमांपलीकडचे पॅटर्न: भाषा, दृश्य, शिफारस</li><li data-en="'roughly right, usually' is acceptable and checkable">'साधारण बरोबर, बहुधा' चालण्यासारखे आणि तपासता येणारे</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="exact auditable logic: payroll, tax, safety interlocks — write code!">नेमके audit करता येणारे तर्कशास्त्र: पगार, कर, सुरक्षा कुलपे — कोड लिहा!</li><li data-en="tiny data, huge stakes, no tolerance for surprises">अगदी थोडा डेटा, प्रचंड जोखीम, धक्क्यांना शून्य सहनशीलता</li><li data-en="a regex would do — the boring tool is allowed to win 😄">regex पुरेल — कंटाळवाण्या साधनाला जिंकू द्यायची परवानगी आहे 😄</li></ul></div>
 </div>
-</body>
+</section>
+<section class="term" id="tune" style="--c:#7c3aed">
+<h2 data-en="🗒️ Fine-tuning &amp;amp; LoRA vs RAG vs prompting — lessons 07, 08, 10">🗒️ Fine-tuning &amp; LoRA विरुद्ध RAG विरुद्ध prompting — धडे 07, 08, 10</h2>
+<div class="hist"><b data-en="⏮️ Before this decision tree existed (~2022)">⏮️ हा निर्णय-वृक्ष अस्तित्वात येण्याआधी (~2022)</b><p data-en="If you wanted a model to know or behave differently, the only lever was full retraining — museum-budget territory. Today there are three ladders, and picking wrong burns months: prompting (free, per-request), RAG (fresh facts on the desk), fine-tuning/LoRA (bake in style).">मॉडेलने वेगळे जाणावे किंवा वागावे असे वाटले तर एकमेव उपाय पूर्ण retraining — संग्रहालयाच्या बजेटचा प्रदेश. आज तीन शिड्या आहेत, आणि चुकीची निवड महिने जाळते: prompting (मोफत, प्रत्येक विनंतीला), RAG (टेबलावर ताजे तथ्य), fine-tuning/LoRA (शैली बेक करा).</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="prompting: instant, free, reversible — always try FIRST">prompting: तात्काळ, मोफत, उलटवता येणारे — नेहमी आधी प्रयत्न करा</li><li data-en="RAG: fresh + auditable facts, update = re-index tonight">RAG: ताजे + audit करता येणारे तथ्य, update = आज रात्री re-index</li><li data-en="LoRA: real style/format/domain-voice gains on one GPU">LoRA: एका GPU वर खरी शैली/स्वरूप/domain-आवाजाची कमाई</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="prompting can't add knowledge or unbreakable habits">prompting ज्ञान किंवा अतूट सवयी जोडू शकत नाही</li><li data-en="RAG lives and dies by retrieval quality (garbage in…)">RAG retrieval च्या दर्जावर जगते-मरते (कचरा आत…)</li><li data-en="tuning: costs, drifts stale, and CANNOT reliably add facts">tuning: खर्च, शिळे होते, आणि तथ्य विश्वसनीयपणे जोडू शकत नाही</li><li data-en="teams routinely fine-tune when a better prompt would have done">चांगला prompt पुरला असता तिथे टीम सर्रास fine-tune करतात</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="order of operations: prompt → RAG for facts → tune for style">क्रम: prompt → तथ्यांसाठी RAG → शैलीसाठी tune</li><li data-en="tune when format/tone must be deep and consistent (and prompts maxed out)">स्वरूप/सूर खोल आणि सुसंगत हवा तेव्हा tune करा (आणि prompts ची मर्यादा गाठल्यावर)</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="'let's fine-tune so it knows our docs' — that's RAG's job, always">'आपले docs कळावेत म्हणून fine-tune करू' — ते RAG चे काम, नेहमी</li><li data-en="before you've even written a decent system prompt">तुम्ही चांगला system prompt लिहिण्याआधीच</li></ul></div>
+</div>
+</section>
+<section class="term" id="rag" style="--c:#0d9488">
+<h2 data-en="📖 RAG — lesson 10">📖 RAG — धडा 10</h2>
+<div class="hist"><b data-en="⏮️ Before RAG (pre-2023 for most teams)">⏮️ RAG च्या आधी (बहुतेक टीमसाठी 2023 पूर्वी)</b><p data-en="Company knowledge lived behind keyword search (exact-word-or-nothing), hand-curated FAQ bots that answered 12 questions, and 'ask Priya, she knows where the doc is'. Models answered company questions closed-book — i.e., they made things up (lesson 09).">कंपनीचे ज्ञान keyword search मागे (नेमका-शब्द-किंवा-काहीच-नाही), 12 प्रश्नांची उत्तरे देणारे हाताने बनवलेले FAQ bots, आणि 'प्रियाला विचारा, तिला माहीत आहे doc कुठे आहे' यात राहत असे. मॉडेल कंपनीच्या प्रश्नांची उत्तरे पुस्तक बंद ठेवून देत — म्हणजे बनवून सांगत (धडा 09).</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="grounded answers with citations — hallucination's best antidote">संदर्भासह आधार असलेली उत्तरे — hallucination वरचा उत्तम उतारा</li><li data-en="knowledge updates nightly (re-index), no retraining">ज्ञान रोज रात्री update (re-index), retraining नाही</li><li data-en="semantic: finds meaning, not just matching words">semantic: फक्त जुळणारे शब्द नव्हे, अर्थ शोधते</li><li data-en="per-question cost is pennies">प्रत्येक प्रश्नाचा खर्च काही पैसे</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="a real pipeline to build and monitor (chunking, top-k, rerank)">बांधायची आणि monitor करायची खरी pipeline (chunking, top-k, rerank)</li><li data-en="retrieval misses → confident closed-book nonsense returns">retrieval चुकले → आत्मविश्वासाने पुस्तक-बंद मूर्खपणा परत</li><li data-en="struggles with cross-document reasoning ('compare all 50 contracts')">अनेक दस्तऐवजांतील तर्काशी झगडते ('सगळ्या 50 करारांची तुलना करा')</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="chat-with-your-docs, support bots, policy Q&amp;amp;A — the classic wins">chat-with-your-docs, support bots, policy प्रश्नोत्तरे — क्लासिक विजय</li><li data-en="answers must cite sources (compliance loves RAG)">उत्तरांनी स्रोत सांगणे आवश्यक (compliance ला RAG आवडते)</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="the whole corpus fits comfortably on the desk — just paste it">संपूर्ण corpus टेबलावर सहज मावतो — फक्त paste करा</li><li data-en="questions need global aggregation, not lookup → databases/BI">प्रश्नांना lookup नव्हे, जागतिक एकत्रीकरण हवे → डेटाबेस/BI</li><li data-en="your documents are wrong — RAG faithfully cites garbage 😅">तुमचे दस्तऐवजच चुकीचे आहेत — RAG प्रामाणिकपणे कचरा उद्धृत करते 😅</li></ul></div>
+</div>
+</section>
+<section class="term" id="agents" style="--c:#0d9488">
+<h2 data-en="📋 Agents &amp;amp; tool use — lesson 11">📋 एजंट्स &amp; साधनांचा वापर — धडा 11</h2>
+<div class="hist"><b data-en="⏮️ Before agents (~2023)">⏮️ एजंट्सच्या आधी (~2023)</b><p data-en="Automation meant brittle scripts and RPA bots that clicked pixel coordinates and shattered when a button moved. Chatbots could only TALK — every actual action returned to a human. The glue between 'model suggests' and 'something happens' was always a person.">Automation म्हणजे ठिसूळ स्क्रिप्ट आणि pixel निर्देशांकांवर क्लिक करणारे RPA bots जे बटण हलले की तुटत. Chatbots फक्त बोलू शकत — प्रत्येक खरी कृती माणसाकडे परत जाई. 'मॉडेल सुचवते' आणि 'काहीतरी घडते' यामधला दुवा नेहमी माणूस होता.</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="turns advice into outcomes: looks things up, files, fixes, retries">सल्ल्याचे परिणामात रूपांतर: शोधते, नोंदवते, दुरुस्त करते, पुन्हा प्रयत्न करते</li><li data-en="handles fuzzy multi-step goals scripts never could">स्क्रिप्ट कधीच जमवू शकल्या नाहीत ती धूसर बहु-पायरी ध्येये हाताळते</li><li data-en="recovers from surprises by re-planning (scripts just crash)">पुन्हा-नियोजन करून धक्क्यांतून सावरते (स्क्रिप्ट फक्त crash होतात)</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="errors compound step by step — confidently wrong, with momentum">चुका पावलागणिक साचतात — आत्मविश्वासाने चुकीचे, वेगासह</li><li data-en="harder to test: same goal, different paths each run">तपासणे अवघड: तेच ध्येय, प्रत्येक वेळी वेगळा मार्ग</li><li data-en="token costs multiply (every think-act-look loop bills)">token खर्च गुणाकाराने वाढतो (प्रत्येक विचार-कृती-निरीक्षण लूप बिल लावतो)</li><li data-en="real permissions = real blast radius — guardrails are NOT optional">खऱ्या परवानग्या = खरा blast radius — guardrails ऐच्छिक नाहीत</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="multi-step work with verifiable outcomes (tests pass, ticket filed)">पडताळता येणारे परिणाम असलेले बहु-पायरी काम (tests पास, तिकीट नोंदवले)</li><li data-en="read-heavy research/triage where a human signs the final act">वाचन-जड संशोधन/triage जिथे अंतिम कृतीवर माणूस सही करतो</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="one deterministic step — a plain API call is faster and safer">एक ठरलेली पायरी — साधा API कॉल जलद आणि सुरक्षित</li><li data-en="irreversible actions without human gates (payments, deletes, sends)">मानवी दारांशिवाय उलटवता न येणाऱ्या कृती (पैसे, हटवणे, पाठवणे)</li><li data-en="you can't yet MEASURE task success — build evals first">तुम्ही अजून कामाचे यश मोजू शकत नाही — आधी evals बांधा</li></ul></div>
+</div>
+</section>
+<section class="term" id="diffusion" style="--c:#0d9488">
+<h2 data-en="📺 Diffusion image generation — lesson 12">📺 Diffusion प्रतिमा निर्मिती — धडा 12</h2>
+<div class="hist"><b data-en="⏮️ Before diffusion (~2021)">⏮️ diffusion च्या आधी (~2021)</b><p data-en="Custom visuals meant stock-photo hunting, commissioning designers for every variant, or GANs — impressive but unstable to train and hard to steer with text. 'A cat astronaut in watercolor' was a commission, not a sentence.">खास दृश्ये म्हणजे stock-photo शोध, प्रत्येक प्रकारासाठी डिझायनरना काम देणे, किंवा GANs — प्रभावी पण train करायला अस्थिर आणि मजकुराने वळवायला अवघड. 'watercolor मध्ये मांजर-अंतराळवीर' हे एक काम होते, वाक्य नव्हे.</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="any describable image in seconds; iterate by editing the sentence">वर्णन करता येणारी कोणतीही प्रतिमा सेकंदांत; वाक्य बदलून पुनरावृत्ती करा</li><li data-en="steerable: style, composition, edits (inpainting), consistent characters">वळवता येणारे: शैली, रचना, बदल (inpainting), सुसंगत पात्रे</li><li data-en="the same recipe scales to video and audio">तीच पाककृती व्हिडिओ आणि ऑडिओला लागू</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="text inside images is letter-SHAPES (L03's revenge) — often gibberish">प्रतिमेतील मजकूर म्हणजे अक्षरांचे आकार (L03 चा सूड) — अनेकदा निरर्थक</li><li data-en="global constraints wobble: fingers, symmetry, object counts">जागतिक बंधने डळमळतात: बोटे, सममिती, वस्तूंची संख्या</li><li data-en="training-data provenance and copyright remain contested">training-data चा उगम आणि copyright अजूनही वादग्रस्त</li><li data-en="photoreal fakes demand disclosure norms — use them">photoreal बनावटींना खुलासा-नियम लागतात — ते वापरा</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="concepts, moods, storyboards, illustrations, product mockups">संकल्पना, mood, storyboards, चित्रे, product mockups</li><li data-en="volume + iteration beat pixel-perfect fidelity">pixel-perfect अचूकतेपेक्षा संख्या + पुनरावृत्ती महत्त्वाची</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="brand-exact detail (logos, UI text) — designers still win">brand-नेमका तपशील (logos, UI मजकूर) — डिझायनर अजूनही जिंकतात</li><li data-en="factual/technical figures (use real charts! — dataviz, not vibes)">तथ्यात्मक/तांत्रिक आकृत्या (खरे charts वापरा! — dataviz, vibes नव्हे)</li><li data-en="anything passing off generated people/events as real">निर्माण केलेल्या व्यक्ती/घटना खऱ्या म्हणून खपवणे काहीही</li></ul></div>
+</div>
+</section>
+<section class="term" id="openclosed" style="--c:#0d9488">
+<h2 data-en="🔓 Open-weights vs closed API models">🔓 Open-weights विरुद्ध closed API मॉडेल</h2>
+<div class="hist"><b data-en="⏮️ Before the choice existed (~2023)">⏮️ ही निवड अस्तित्वात येण्याआधी (~2023)</b><p data-en="Frontier AI = a handful of closed APIs, take it or leave it. Then LLaMA-family leaks and releases created a genuine second lane: download the weights, run them yourself, tune them freely (LoRA, L07). Now every team faces the build-vs-rent question AWS taught you (EC2 course!) — for brains.">Frontier AI = मूठभर closed APIs, घ्या किंवा सोडा. मग LLaMA-कुटुंबाच्या leaks आणि releases ने खरा दुसरा मार्ग तयार केला: weights download करा, स्वतः चालवा, मुक्तपणे tune करा (LoRA, L07). आता प्रत्येक टीमसमोर AWS ने शिकवलेला build-विरुद्ध-rent प्रश्न (EC2 कोर्स!) — मेंदूंसाठी.</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="closed API: frontier quality, zero ops, pay-per-token">closed API: frontier दर्जा, शून्य ops, प्रत्येक token चे पैसे</li><li data-en="open weights: data stays home, cost-per-token can plummet at scale, tune anything, no vendor veto">open weights: डेटा घरी राहतो, मोठ्या प्रमाणावर प्रत्येक token चा खर्च कोसळू शकतो, काहीही tune करा, vendor चा नकाराधिकार नाही</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="closed: data leaves, prices/models change under you, rate limits">closed: डेटा बाहेर जातो, किमती/मॉडेल तुमच्याखाली बदलतात, rate limits</li><li data-en="open: you run the GPUs (ops!), usually behind frontier quality, security patches are your job">open: तुम्ही GPU चालवता (ops!), सहसा frontier दर्जाच्या मागे, security patches तुमचे काम</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="closed: start here — validate the product before owning infra">closed: इथून सुरू करा — infra ची मालकी घेण्याआधी product पडताळा</li><li data-en="open: privacy mandates, huge steady volume, deep customization">open: privacy चे आदेश, प्रचंड स्थिर volume, खोल customization</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="open 'to save money' at small scale — GPU ops eats the savings">छोट्या प्रमाणावर 'पैसे वाचवायला' open — GPU ops बचत खाऊन टाकते</li><li data-en="closed for regulated data without a proper agreement in place">योग्य करार नसताना नियंत्रित डेटासाठी closed</li></ul></div>
+</div>
+</section>
+<section class="term" id="mcp" style="--c:#0d9488">
+<h2 data-en="🔌 MCP vs bespoke tool integrations — lesson 13">🔌 MCP विरुद्ध खास बनवलेली tool integrations — धडा 13</h2>
+<div class="hist"><b data-en="⏮️ Before MCP (pre-2025)">⏮️ MCP च्या आधी (2025 पूर्वी)</b><p data-en="Every AI app hand-wired every tool: one GitHub integration for the IDE, ANOTHER for the chatbot, a third for the agent — N apps × M tools = N×M adapters, none reusable. Capabilities were private wiring, not shareable parts.">प्रत्येक AI ॲप प्रत्येक साधन हाताने जोडत असे: IDE साठी एक GitHub integration, chatbot साठी दुसरे, एजंटसाठी तिसरे — N ॲप्स × M साधने = N×M adapters, एकही पुन्हा वापरता येणारे नाही. क्षमता म्हणजे खाजगी वायरिंग, वाटता येणारे भाग नव्हे.</p></div>
+<div class="quad">
+<div class="q merit"><h4 data-en="✅ Merits">✅ फायदे</h4><ul><li data-en="write a server once → works in every MCP host (N+M)">सर्व्हर एकदा लिहा → प्रत्येक MCP host मध्ये चालतो (N+M)</li><li data-en="growing ecosystem of ready-made servers to plug in">जोडायला तयार servers ची वाढती परिसंस्था</li><li data-en="standard discovery: models find tools at connect time">मानक discovery: मॉडेल जोडणीच्या वेळी साधने शोधतात</li><li data-en="swap AI apps without rewiring your integrations">integrations पुन्हा न जोडता AI ॲप्स बदला</li></ul></div>
+<div class="q demerit"><h4 data-en="❌ Demerits">❌ तोटे</h4><ul><li data-en="young standard — server quality varies wildly">तरुण मानक — server चा दर्जा प्रचंड बदलतो</li><li data-en="each server = installed software with YOUR permissions">प्रत्येक server = तुमच्या परवानग्यांसह installed सॉफ्टवेअर</li><li data-en="tool results can carry prompt injection — audit sources">साधनांचे निकाल prompt injection घेऊन येऊ शकतात — स्रोत audit करा</li><li data-en="local config friction (paths, env, versions) is real">स्थानिक config चा त्रास (paths, env, versions) खरा आहे</li></ul></div>
+<div class="q use"><h4 data-en="👍 Use when">👍 वापरा जेव्हा</h4><ul><li data-en="agents/apps needing several tools, today and tomorrow">आज आणि उद्या अनेक साधने लागणारे एजंट/ॲप्स</li><li data-en="your capability should work from many AI apps">तुमची क्षमता अनेक AI ॲप्समधून चालावी</li><li data-en="teams sharing internal tools across assistants">assistants मध्ये अंतर्गत साधने वाटणाऱ्या टीम</li></ul></div>
+<div class="q avoid"><h4 data-en="👎 Think twice when">👎 दोनदा विचार करा जेव्हा</h4><ul><li data-en="one hardcoded tool in one app — plain function calling is simpler">एका ॲपमध्ये एक hardcoded साधन — साधे function calling सोपे</li><li data-en="untrusted third-party servers on sensitive machines">संवेदनशील मशीनवर अविश्वसनीय तृतीय-पक्ष servers</li><li data-en="a plain REST call from YOUR code does the job — no model needed">तुमच्या कोडमधून साधा REST कॉल काम करतो — मॉडेलची गरज नाही</li></ul></div>
+</div>
+</section>
+<footer data-en='
+  Learn AI School · &lt;a href="index.html"&gt;Course home&lt;/a&gt; ·
+  &lt;a href="lesson-diagrams.html"&gt;Lesson diagrams&lt;/a&gt; ·
+  &lt;a href="https://github.com/BaluRaut/learn-ai-school"&gt;github.com/BaluRaut/learn-ai-school&lt;/a&gt;
+ ·
+  &lt;a href="https://baluraut.github.io/school/"&gt;🏫 all schools&lt;/a&gt;
+ ·
+  &lt;a href="https://github.com/BaluRaut/learn-ai-school/issues"&gt;🐛 found a mistake?&lt;/a&gt;
+'>Learn AI School · <a href="index.html">कोर्स मुख्य पान</a> · <a href="lesson-diagrams.html">धड्यांच्या आकृत्या</a> · <a href="https://github.com/BaluRaut/learn-ai-school">github.com/BaluRaut/learn-ai-school</a> · <a href="https://baluraut.github.io/school/">🏫 सर्व शाळा</a> · <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 चूक सापडली?</a></footer>
+</div>
+
+<script id="i18n-js">
+function schoolSetLang(l){
+  try{localStorage.setItem('school-lang',l)}catch(e){}
+  document.documentElement.setAttribute('lang',l);
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    if(!el.hasAttribute('data-mr')) el.setAttribute('data-mr', el.innerHTML);
+    el.innerHTML = (l==='en') ? el.getAttribute('data-en') : el.getAttribute('data-mr');
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){
+    if(!el.hasAttribute('data-mr-ph')) el.setAttribute('data-mr-ph', el.getAttribute('placeholder'));
+    el.setAttribute('placeholder', (l==='en') ? el.getAttribute('data-en-ph') : el.getAttribute('data-mr-ph'));
+  });
+  var p=document.getElementById('lang-pick'); if(p) p.value=l;
+}
+(function(){ var l='mr'; try{ l=localStorage.getItem('school-lang')||'mr'; }catch(e){}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){schoolSetLang(l)}); else schoolSetLang(l); })();
+</script></body>
 </html>

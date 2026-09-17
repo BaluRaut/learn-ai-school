@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="mr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Study plan — Learn AI School</title>
-<meta name="description" content="A 4-week study plan for the 12-lesson AI course: sequence, time estimates, weekly milestones — progress saved in your browser.">
-<meta property="og:title" content="Study plan — Learn AI School">
-<meta property="og:description" content="A 4-week study plan for the 12-lesson AI course: sequence, time estimates, weekly milestones — progress saved in your browser.">
-<meta property="og:image" content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-en="Study plan — Learn AI School">अभ्यास योजना — Learn AI School</title>
+<meta content="A 4-week study plan for the 12-lesson AI course: sequence, time estimates, weekly milestones — progress saved in your browser." name="description"/>
+<meta content="Study plan — Learn AI School" property="og:title"/>
+<meta content="A 4-week study plan for the 12-lesson AI course: sequence, time estimates, weekly milestones — progress saved in your browser." property="og:description"/>
+<meta content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="summary_large_image" name="twitter:card"/>
 <style>
   :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --blue:#2563eb; --bad:#dc2626; }
   @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
@@ -57,79 +58,81 @@
   .milestone b { color:var(--ok); }
   #done { display:none; text-align:center; background:var(--card); border:2px solid var(--ok); border-radius:20px; padding:32px 24px; margin-top:26px; }
 </style>
-</head>
-<body>
 
+<style id="i18n-css">
+#lang-pick{position:fixed;top:10px;right:10px;z-index:9999;font:600 .85rem -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--card,#fff);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:6px 12px;box-shadow:0 2px 10px rgba(0,0,0,.08);cursor:pointer}
+html[lang="mr"] body{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+html[lang="mr"] svg text{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",sans-serif}
+@media print{#lang-pick{display:none}}
+</style></head>
+<body><select aria-label="Language / भाषा" id="lang-pick" onchange="schoolSetLang(this.value)">
+<option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select>
 <div class="wrap">
 <header>
-  <p><a href="index.html">← Back to the course home</a></p>
-  <h1>🗓️ The study plan — 13 lessons, 4 weeks</h1>
-  <p class="sub">~<b>3 sessions a week</b>: read the lesson (~15 min) + do its lab (~25 min).
-  Tick lessons off — <b>progress is saved in this browser</b>. Watch the
-  <a href="https://www.youtube.com/watch?v=nVnxG10D5W0">companion video</a> before Week 1 for the aerial view.</p>
-  <div class="paces">
-    <div class="pace">🐢 <b>Steady:</b> 3 sessions/week → done in 4 weeks.</div>
-    <div class="pace">🐇 <b>Fast track:</b> a weekend per part → done in 2 weekends.</div>
-    <div class="pace">💰 <b>Cost:</b> zero. Plain Python + any free chatbot.</div>
-  </div>
-</header>
-
-<div class="progress-box"><div class="progress-inner">
-  <span id="ptext">0 / 12</span>
-  <div class="bar"><div id="pbar"></div></div>
-</div></div>
-
-<section class="week" style="--c:#7c3aed">
-  <h2><span class="wk">WEEK 1</span> 📖 Foundations — how learning works</h2>
-  <p class="goal">The inversion (rules are grown), the red pen, and the puzzle pieces. Labs: two of the three demos.</p>
-  <div class="lesson-row"><input type="checkbox" data-l="l01" id="sl01"><label for="sl01"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">01 · 📖 What is AI</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l02" id="sl02"><label for="sl02"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-02-training/lessons/02-training/README.md">02 · ✏️ Training</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l03" id="sl03"><label for="sl03"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-03-tokens/lessons/03-tokens/README.md">03 · 🧩 Tokens</a></label><span class="time">~35 min</span></div>
-  <div class="milestone">🏁 <b>Checkpoint:</b> run bigram_model.py and tokenizer_toy.py; explain 'data + answers → rules' and why 'strawberry' is hard — out loud, to someone.</div>
-</section>
-<section class="week" style="--c:#7c3aed">
-  <h2><span class="wk">WEEK 2</span> 🗺️ The engine — meaning, guessing, glancing</h2>
-  <p class="goal">Embeddings, the next-token game, attention. Lab: the attention demo, twice (once modified).</p>
-  <div class="lesson-row"><input type="checkbox" data-l="l04" id="sl04"><label for="sl04"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-04-embeddings/lessons/04-embeddings/README.md">04 · 🗺️ Embeddings</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l05" id="sl05"><label for="sl05"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-05-next-token/lessons/05-next-token/README.md">05 · 🎲 Next-token prediction</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l06" id="sl06"><label for="sl06"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-06-attention/lessons/06-attention/README.md">06 · 👀 Attention</a></label><span class="time">~45 min</span></div>
-  <div class="milestone">🏁 <b>Checkpoint:</b> run attention_toy.py; flip 'it' to ball-shaped and predict the change before running; recite query/key/value in school words.</div>
-</section>
-<section class="week" style="--c:#0d9488">
-  <h2><span class="wk">WEEK 3</span> ⭐ Finishing school &amp; asking well</h2>
-  <p class="goal">RLHF/LoRA, prompting on the small desk, and the confident kid. Labs: the A/B prompt test + hallucination hunt.</p>
-  <div class="lesson-row"><input type="checkbox" data-l="l07" id="sl07"><label for="sl07"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-07-rlhf-lora/lessons/07-rlhf-lora/README.md">07 · ⭐ RLHF &amp; LoRA</a></label><span class="time">~45 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l08" id="sl08"><label for="sl08"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-08-prompting-context/lessons/08-prompting-context/README.md">08 · 🗣️ Prompting &amp; context</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l09" id="sl09"><label for="sl09"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-09-hallucinations/lessons/09-hallucinations/README.md">09 · 🙋 Hallucinations</a></label><span class="time">~35 min</span></div>
-  <div class="milestone">🏁 <b>Checkpoint:</b> your B-prompt visibly beats your A-prompt; you caught (and verified!) one hallucination; you know when to fine-tune vs RAG — say the rule.</div>
-</section>
-<section class="week" style="--c:#0d9488">
-  <h2><span class="wk">WEEK 4</span> 🧰 Building — open books, hall passes, static</h2>
-  <p class="goal">RAG by hand, being the agent's harness, diffusion probes — then the capstone.</p>
-  <div class="lesson-row"><input type="checkbox" data-l="l10" id="sl10"><label for="sl10"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-10-rag/lessons/10-rag/README.md">10 · 📖 RAG</a></label><span class="time">~45 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l11" id="sl11"><label for="sl11"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-11-agents/lessons/11-agents/README.md">11 · 📋 Agents &amp; tools</a></label><span class="time">~45 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l12" id="sl12"><label for="sl12"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-12-diffusion/lessons/12-diffusion/README.md">12 · 📺 Diffusion &amp; multimodal</a></label><span class="time">~40 min</span></div>
-  <div class="lesson-row"><input type="checkbox" data-l="l13" id="sl13"><label for="sl13"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-13-mcp/lessons/13-mcp/README.md">13 · 🔌 Bonus: MCP</a></label><span class="time">~40 min</span></div>
-  <div class="milestone">🏁 <b>Checkpoint:</b> 🏆 <b>Capstone:</b> re-watch the <a href='{VIDEO}'>companion video</a> and pause after each of the 9 concepts — explain every one in YOUR school-analogy words. Bonus: build the 30-line RAG from lesson 10 for real.</div>
-</section>
-
-<div id="done">
-  <h2>🎓 13 / 13 — zero magic left, sockets included!</h2>
-  <p class="sub" style="margin:10px auto 0">Next: build something — or tour the rest of the school:
-  <a href="https://baluraut.github.io/learn-kubernetes-school/">Kubernetes</a> ·
-  <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> ·
-  <a href="https://baluraut.github.io/learn-aws-school/">AWS</a> ·
-  <a href="https://baluraut.github.io/learn-argocd-school/">ArgoCD</a>.</p>
+<p data-en='&lt;a href="index.html"&gt;← Back to the course home&lt;/a&gt;'><a href="index.html">← कोर्सच्या मुख्य पानाकडे परत</a></p>
+<h1 data-en="🗓️ The study plan — 13 lessons, 4 weeks">🗓️ अभ्यास योजना — 13 धडे, 4 आठवडे</h1>
+<p class="sub" data-en='~&lt;b&gt;3 sessions a week&lt;/b&gt;: read the lesson (~15 min) + do its lab (~25 min).
+  Tick lessons off — &lt;b&gt;progress is saved in this browser&lt;/b&gt;. Watch the
+  &lt;a href="https://www.youtube.com/watch?v=nVnxG10D5W0"&gt;companion video&lt;/a&gt; before Week 1 for the aerial view.'>आठवड्याला ~<b>3 सत्रे</b>: धडा वाचा (~15 मि.) + त्याचा प्रयोग करा (~25 मि.). धड्यांवर खूण करा — <b>प्रगती या ब्राउझरमध्ये जपली जाते</b>. हवाई दृश्यासाठी आठवडा 1 आधी <a href="https://www.youtube.com/watch?v=nVnxG10D5W0">सोबतचा व्हिडिओ</a> पहा.</p>
+<div class="paces">
+<div class="pace" data-en="🐢 &lt;b&gt;Steady:&lt;/b&gt; 3 sessions/week → done in 4 weeks.">🐢 <b>स्थिर:</b> आठवड्याला 3 सत्रे → 4 आठवड्यांत पूर्ण.</div>
+<div class="pace" data-en="🐇 &lt;b&gt;Fast track:&lt;/b&gt; a weekend per part → done in 2 weekends.">🐇 <b>जलद मार्ग:</b> प्रत्येक भागाला एक weekend → 2 weekends मध्ये पूर्ण.</div>
+<div class="pace" data-en="💰 &lt;b&gt;Cost:&lt;/b&gt; zero. Plain Python + any free chatbot.">💰 <b>खर्च:</b> शून्य. साधे Python + कोणताही मोफत chatbot.</div>
 </div>
-
-<footer>
-  Learn AI School · <a href="index.html">Course home</a> ·
-  <a href="https://github.com/BaluRaut/learn-ai-school">GitHub</a>
+</header>
+<div class="progress-box"><div class="progress-inner">
+<span id="ptext">0 / 12</span>
+<div class="bar"><div id="pbar"></div></div>
+</div></div>
+<section class="week" style="--c:#7c3aed">
+<h2 data-en='&lt;span class="wk"&gt;WEEK 1&lt;/span&gt; 📖 Foundations — how learning works'><span class="wk">आठवडा 1</span> 📖 पाया — शिकणे कसे चालते</h2>
+<p class="goal" data-en="The inversion (rules are grown), the red pen, and the puzzle pieces. Labs: two of the three demos.">उलटा विचार (नियम वाढवले जातात), लाल पेन, आणि कोड्याचे तुकडे. प्रयोग: तीनपैकी दोन demos.</p>
+<div class="lesson-row"><input data-l="l01" id="sl01" type="checkbox"/><label data-en='&lt;a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md"&gt;01 · 📖 What is AI&lt;/a&gt;' for="sl01"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-01-what-is-ai/lessons/01-what-is-ai/README.md">01 · 📖 AI म्हणजे काय</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l02" id="sl02" type="checkbox"/><label for="sl02"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-02-training/lessons/02-training/README.md">02 · ✏️ Training</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l03" id="sl03" type="checkbox"/><label data-en='&lt;a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-03-tokens/lessons/03-tokens/README.md"&gt;03 · 🧩 Tokens&lt;/a&gt;' for="sl03"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-03-tokens/lessons/03-tokens/README.md">03 · 🧩 टोकन</a></label><span class="time" data-en="~35 min">~35 मि.</span></div>
+<div class="milestone" data-en="🏁 &lt;b&gt;Checkpoint:&lt;/b&gt; run bigram_model.py and tokenizer_toy.py; explain 'data + answers → rules' and why 'strawberry' is hard — out loud, to someone.">🏁 <b>तपासणी:</b> bigram_model.py आणि tokenizer_toy.py चालवा; 'डेटा + उत्तरे → नियम' आणि 'strawberry' अवघड का ते समजावा — मोठ्याने, कोणालातरी.</div>
+</section>
+<section class="week" style="--c:#7c3aed">
+<h2 data-en='&lt;span class="wk"&gt;WEEK 2&lt;/span&gt; 🗺️ The engine — meaning, guessing, glancing'><span class="wk">आठवडा 2</span> 🗺️ इंजिन — अर्थ, अंदाज, नजर</h2>
+<p class="goal" data-en="Embeddings, the next-token game, attention. Lab: the attention demo, twice (once modified).">Embeddings, पुढच्या टोकनचा खेळ, attention. प्रयोग: attention demo, दोनदा (एकदा बदलून).</p>
+<div class="lesson-row"><input data-l="l04" id="sl04" type="checkbox"/><label for="sl04"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-04-embeddings/lessons/04-embeddings/README.md">04 · 🗺️ Embeddings</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l05" id="sl05" type="checkbox"/><label data-en='&lt;a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-05-next-token/lessons/05-next-token/README.md"&gt;05 · 🎲 Next-token prediction&lt;/a&gt;' for="sl05"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-05-next-token/lessons/05-next-token/README.md">05 · 🎲 पुढच्या टोकनचा अंदाज</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l06" id="sl06" type="checkbox"/><label for="sl06"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-06-attention/lessons/06-attention/README.md">06 · 👀 Attention</a></label><span class="time" data-en="~45 min">~45 मि.</span></div>
+<div class="milestone" data-en="🏁 &lt;b&gt;Checkpoint:&lt;/b&gt; run attention_toy.py; flip 'it' to ball-shaped and predict the change before running; recite query/key/value in school words.">🏁 <b>तपासणी:</b> attention_toy.py चालवा; 'it' ला ball-आकाराचे करा आणि चालवण्याआधी बदलाचा अंदाज करा; query/key/value शाळेच्या शब्दांत पाठ म्हणा.</div>
+</section>
+<section class="week" style="--c:#0d9488">
+<h2 data-en='&lt;span class="wk"&gt;WEEK 3&lt;/span&gt; ⭐ Finishing school &amp;amp; asking well'><span class="wk">आठवडा 3</span> ⭐ Finishing school &amp; नीट विचारणे</h2>
+<p class="goal" data-en="RLHF/LoRA, prompting on the small desk, and the confident kid. Labs: the A/B prompt test + hallucination hunt.">RLHF/LoRA, छोट्या टेबलावर prompting, आणि आत्मविश्वासू मूल. प्रयोग: A/B prompt चाचणी + hallucination शोध.</p>
+<div class="lesson-row"><input data-l="l07" id="sl07" type="checkbox"/><label for="sl07"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-07-rlhf-lora/lessons/07-rlhf-lora/README.md">07 · ⭐ RLHF &amp; LoRA</a></label><span class="time" data-en="~45 min">~45 मि.</span></div>
+<div class="lesson-row"><input data-l="l08" id="sl08" type="checkbox"/><label for="sl08"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-08-prompting-context/lessons/08-prompting-context/README.md">08 · 🗣️ Prompting &amp; context</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l09" id="sl09" type="checkbox"/><label for="sl09"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-09-hallucinations/lessons/09-hallucinations/README.md">09 · 🙋 Hallucinations</a></label><span class="time" data-en="~35 min">~35 मि.</span></div>
+<div class="milestone" data-en="🏁 &lt;b&gt;Checkpoint:&lt;/b&gt; your B-prompt visibly beats your A-prompt; you caught (and verified!) one hallucination; you know when to fine-tune vs RAG — say the rule.">🏁 <b>तपासणी:</b> तुमचा B-prompt A-prompt ला स्पष्टपणे हरवतो; तुम्ही एक hallucination पकडले (आणि पडताळले!); fine-tune कधी विरुद्ध RAG कधी हे तुम्हाला माहीत आहे — नियम सांगा.</div>
+</section>
+<section class="week" style="--c:#0d9488">
+<h2 data-en='&lt;span class="wk"&gt;WEEK 4&lt;/span&gt; 🧰 Building — open books, hall passes, static'><span class="wk">आठवडा 4</span> 🧰 बांधणी — उघडी पुस्तके, हॉल पास, static</h2>
+<p class="goal" data-en="RAG by hand, being the agent's harness, diffusion probes — then the capstone.">हाताने RAG, एजंटचे harness बनणे, diffusion चाचण्या — मग कळस-प्रकल्प.</p>
+<div class="lesson-row"><input data-l="l10" id="sl10" type="checkbox"/><label for="sl10"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-10-rag/lessons/10-rag/README.md">10 · 📖 RAG</a></label><span class="time" data-en="~45 min">~45 मि.</span></div>
+<div class="lesson-row"><input data-l="l11" id="sl11" type="checkbox"/><label data-en='&lt;a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-11-agents/lessons/11-agents/README.md"&gt;11 · 📋 Agents &amp;amp; tools&lt;/a&gt;' for="sl11"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-11-agents/lessons/11-agents/README.md">11 · 📋 एजंट्स &amp; साधने</a></label><span class="time" data-en="~45 min">~45 मि.</span></div>
+<div class="lesson-row"><input data-l="l12" id="sl12" type="checkbox"/><label for="sl12"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-12-diffusion/lessons/12-diffusion/README.md">12 · 📺 Diffusion &amp; multimodal</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="lesson-row"><input data-l="l13" id="sl13" type="checkbox"/><label data-en='&lt;a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-13-mcp/lessons/13-mcp/README.md"&gt;13 · 🔌 Bonus: MCP&lt;/a&gt;' for="sl13"><a href="https://github.com/BaluRaut/learn-ai-school/blob/lesson-13-mcp/lessons/13-mcp/README.md">13 · 🔌 बोनस: MCP</a></label><span class="time" data-en="~40 min">~40 मि.</span></div>
+<div class="milestone" data-en='🏁 &lt;b&gt;Checkpoint:&lt;/b&gt; 🏆 &lt;b&gt;Capstone:&lt;/b&gt; re-watch the &lt;a href="{VIDEO}"&gt;companion video&lt;/a&gt; and pause after each of the 9 concepts — explain every one in YOUR school-analogy words. Bonus: build the 30-line RAG from lesson 10 for real.'>🏁 <b>तपासणी:</b> 🏆 <b>कळस-प्रकल्प:</b> <a href="{VIDEO}">सोबतचा व्हिडिओ</a> पुन्हा पहा आणि 9 संकल्पनांपैकी प्रत्येकीनंतर थांबा — प्रत्येक तुमच्या शाळेच्या उपमेच्या शब्दांत समजावा. बोनस: धडा 10 चा 30 ओळींचा RAG खरोखर बांधा.</div>
+</section>
+<div id="done">
+<h2 data-en="🎓 13 / 13 — zero magic left, sockets included!">🎓 13 / 13 — जादू शून्य उरली, sockets सह!</h2>
+<p class="sub" data-en='Next: build something — or tour the rest of the school:
+  &lt;a href="https://baluraut.github.io/learn-kubernetes-school/"&gt;Kubernetes&lt;/a&gt; ·
+  &lt;a href="https://baluraut.github.io/learn-docker-school/"&gt;Docker&lt;/a&gt; ·
+  &lt;a href="https://baluraut.github.io/learn-aws-school/"&gt;AWS&lt;/a&gt; ·
+  &lt;a href="https://baluraut.github.io/learn-argocd-school/"&gt;ArgoCD&lt;/a&gt;.' style="margin:10px auto 0">पुढे: काहीतरी बनवा — किंवा बाकीच्या शाळेचा फेरफटका: <a href="https://baluraut.github.io/learn-kubernetes-school/">Kubernetes</a> · <a href="https://baluraut.github.io/learn-docker-school/">Docker</a> · <a href="https://baluraut.github.io/learn-aws-school/">AWS</a> · <a href="https://baluraut.github.io/learn-argocd-school/">ArgoCD</a>.</p>
+</div>
+<footer data-en='
+  Learn AI School · &lt;a href="index.html"&gt;Course home&lt;/a&gt; ·
+  &lt;a href="https://github.com/BaluRaut/learn-ai-school"&gt;GitHub&lt;/a&gt;
  ·
-  <a href="https://baluraut.github.io/school/">🏫 all schools</a>
+  &lt;a href="https://baluraut.github.io/school/"&gt;🏫 all schools&lt;/a&gt;
  ·
-  <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 found a mistake?</a>
-</footer>
+  &lt;a href="https://github.com/BaluRaut/learn-ai-school/issues"&gt;🐛 found a mistake?&lt;/a&gt;
+'>Learn AI School · <a href="index.html">कोर्स मुख्य पान</a> · <a href="https://github.com/BaluRaut/learn-ai-school">GitHub</a> · <a href="https://baluraut.github.io/school/">🏫 सर्व शाळा</a> · <a href="https://github.com/BaluRaut/learn-ai-school/issues">🐛 चूक सापडली?</a></footer>
 </div>
 <script>
 (function(){
@@ -150,5 +153,22 @@
   render();
 })();
 </script>
-</body>
+
+<script id="i18n-js">
+function schoolSetLang(l){
+  try{localStorage.setItem('school-lang',l)}catch(e){}
+  document.documentElement.setAttribute('lang',l);
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    if(!el.hasAttribute('data-mr')) el.setAttribute('data-mr', el.innerHTML);
+    el.innerHTML = (l==='en') ? el.getAttribute('data-en') : el.getAttribute('data-mr');
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){
+    if(!el.hasAttribute('data-mr-ph')) el.setAttribute('data-mr-ph', el.getAttribute('placeholder'));
+    el.setAttribute('placeholder', (l==='en') ? el.getAttribute('data-en-ph') : el.getAttribute('data-mr-ph'));
+  });
+  var p=document.getElementById('lang-pick'); if(p) p.value=l;
+}
+(function(){ var l='mr'; try{ l=localStorage.getItem('school-lang')||'mr'; }catch(e){}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){schoolSetLang(l)}); else schoolSetLang(l); })();
+</script></body>
 </html>

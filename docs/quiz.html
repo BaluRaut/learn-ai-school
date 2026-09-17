@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiz — 🧠 AI</title>
-<meta name="description" content="Self-test quiz for the 🧠 AI school — 10 questions with explanations.">
-<meta property="og:title" content="Quiz — 🧠 AI"><meta property="og:description" content="10 questions with explanations. Can you pass?"><meta property="og:image" content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
+
+<html lang="mr"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-en="Quiz — 🧠 AI">प्रश्नमंजुषा — 🧠 AI</title>
+<meta content="Self-test quiz for the 🧠 AI school — 10 questions with explanations." name="description"/>
+<meta content="Quiz — 🧠 AI" property="og:title"/><meta content="10 questions with explanations. Can you pass?" property="og:description"/><meta content="https://baluraut.github.io/learn-ai-school/images/big-picture-4k.png" property="og:image"/><meta content="website" property="og:type"/><meta content="summary_large_image" name="twitter:card"/>
 <style>
 :root { --bg:#f8fafc; --card:#fff; --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --accent:#7c3aed; --ok:#16a34a; --bad:#dc2626; --blue:#2563eb; }
 @media (prefers-color-scheme: dark) { :root { --bg:#0b1220; --card:#131c2e; --ink:#e2e8f0; --muted:#94a3b8; --line:#253349; } }
@@ -22,15 +23,22 @@ a { color:var(--blue); } h1 { font-size:1.9rem; }
 .why { display:none; margin-top:10px; color:var(--muted); font-size:.92rem; border-top:1px dashed var(--line); padding-top:8px; }
 .reset { margin-top:20px; background:var(--accent); color:#fff; border:none; border-radius:10px; padding:10px 18px; font:inherit; font-weight:700; cursor:pointer; }
 footer { margin-top:44px; border-top:1px solid var(--line); padding-top:16px; color:var(--muted); font-size:.88rem; }
-</style></head><body><div class="wrap">
-<p><a href="index.html">← Back to the course home</a></p>
-<h1>🧪 The 🧠 AI quiz</h1>
-<p class="sub">10 questions — pick an answer, get the why. One attempt per question (until reset).
-Your best score is saved in this browser.</p>
-<div class="scorebox"><div class="score" id="score">0 / 10 · best: —</div></div>
+</style>
+<style id="i18n-css">
+#lang-pick{position:fixed;top:10px;right:10px;z-index:9999;font:600 .85rem -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--card,#fff);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:6px 12px;box-shadow:0 2px 10px rgba(0,0,0,.08);cursor:pointer}
+html[lang="mr"] body{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+html[lang="mr"] svg text{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",sans-serif}
+@media print{#lang-pick{display:none}}
+</style></head><body><select aria-label="Language / भाषा" id="lang-pick" onchange="schoolSetLang(this.value)">
+<option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select><div class="wrap">
+<p data-en='&lt;a href="index.html"&gt;← Back to the course home&lt;/a&gt;'><a href="index.html">← कोर्सच्या मुख्य पानाकडे परत</a></p>
+<h1 data-en="🧪 The 🧠 AI quiz">🧪 🧠 AI प्रश्नमंजुषा</h1>
+<p class="sub" data-en="10 questions — pick an answer, get the why. One attempt per question (until reset).
+Your best score is saved in this browser.">10 प्रश्न — उत्तर निवडा, कारण मिळवा. प्रत्येक प्रश्नाला एकच प्रयत्न (reset पर्यंत). तुमचा सर्वोत्तम गुण या ब्राउझरमध्ये जपला जातो.</p>
+<div class="scorebox"><div class="score" data-en="0 / 10 · best: —" id="score">0 / 10 · सर्वोत्तम: —</div></div>
 <div id="quiz"></div>
-<button class="reset" onclick="reset()">↺ Reset & retake</button>
-<footer>Part of <a href="https://baluraut.github.io/school/">🏫 The School</a> · <a href="index.html">course home</a></footer>
+<button class="reset" data-en="↺ Reset &amp;amp; retake" onclick="reset()">↺ Reset &amp; पुन्हा द्या</button>
+<footer data-en='Part of &lt;a href="https://baluraut.github.io/school/"&gt;🏫 The School&lt;/a&gt; · &lt;a href="index.html"&gt;course home&lt;/a&gt;'><a href="https://baluraut.github.io/school/">🏫 द स्कूल</a> चा भाग · <a href="index.html">कोर्स मुख्य पान</a></footer>
 </div>
 <script>
 var QS = [{"q": "An LLM's one actual job?", "o": ["Understand grammar", "Predict the next token, repeatedly", "Query a knowledge database"], "c": 1, "w": "L05: the sentence-completion game — everything else emerges from it."}, {"q": "Temperature ≈ 0 gives you…", "o": ["Smarter answers", "The most likely token every time — consistent, safe", "Faster responses"], "c": 1, "w": "L05: the dial trades safety for adventure; code wants ~0."}, {"q": "Why is 'count the R's in strawberry' hard?", "o": ["Models can't count at all", "It sees learned token-pieces, never letters", "Berries are ambiguous"], "c": 1, "w": "L03: [st][raw][berry]-ish IDs — the sensory system has no letters."}, {"q": "Embeddings are…", "o": ["Compression", "Meaning as coordinates — similar meanings sit close", "Encryption"], "c": 1, "w": "L04: the seating chart; distance = similarity powers search and RAG."}, {"q": "What does attention do?", "o": ["Speeds up training", "Lets each token weigh every other token — 'it' → robot 65%", "Filters bad words"], "c": 1, "w": "L06: weighted glancing, many heads, many layers."}, {"q": "RLHF in one line?", "o": ["More data", "Humans pick better answers → a taste-judge → the model gets nudged toward it", "Bigger context"], "c": 1, "w": "L07: gold stars — where helpfulness AND sycophancy come from."}, {"q": "LoRA is…", "o": ["A new model", "Tiny trainable add-on notes on a frozen model (~0.1%)", "A prompt format"], "c": 1, "w": "L07: sticky notes — cheap, swappable personalization."}, {"q": "New company facts should come from…", "o": ["Fine-tuning", "RAG — facts on the desk; tune for style, not facts", "A bigger model"], "c": 1, "w": "L10: the rule of rules — facts→RAG, style→tune."}, {"q": "Why do models hallucinate?", "o": ["Bugs", "Trained for plausibility — truth was never in the loss", "Not enough RAM"], "c": 1, "w": "L09: the confident kid; defenses are open-book, receipts, permission to not know."}, {"q": "The context window is best thought of as…", "o": ["Long-term memory", "The desk — everything must fit; oldest pages slide off", "A cache"], "c": 1, "w": "L08: no desk, no existence; 'memory' is the app re-pasting notes."}];
@@ -65,4 +73,21 @@ function update() {
 }
 function reset() { answered={}; score=0; render(); update(); }
 render(); update();
+</script>
+<script id="i18n-js">
+function schoolSetLang(l){
+  try{localStorage.setItem('school-lang',l)}catch(e){}
+  document.documentElement.setAttribute('lang',l);
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    if(!el.hasAttribute('data-mr')) el.setAttribute('data-mr', el.innerHTML);
+    el.innerHTML = (l==='en') ? el.getAttribute('data-en') : el.getAttribute('data-mr');
+  });
+  document.querySelectorAll('[data-en-ph]').forEach(function(el){
+    if(!el.hasAttribute('data-mr-ph')) el.setAttribute('data-mr-ph', el.getAttribute('placeholder'));
+    el.setAttribute('placeholder', (l==='en') ? el.getAttribute('data-en-ph') : el.getAttribute('data-mr-ph'));
+  });
+  var p=document.getElementById('lang-pick'); if(p) p.value=l;
+}
+(function(){ var l='mr'; try{ l=localStorage.getItem('school-lang')||'mr'; }catch(e){}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){schoolSetLang(l)}); else schoolSetLang(l); })();
 </script></body></html>
