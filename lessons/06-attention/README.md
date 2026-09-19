@@ -22,10 +22,11 @@ scales. Instant, silent, weighted glancing.
 token, that token gets to *look at every other token in the context* and
 decide — with learned weights — **who matters right now**:
 
-- `it` glances hard at `robot` and `ball` (our demo prints: robot 65%!)
+- `it` glances hardest at `ball` — the heavy thing — then at `heavy` itself
+  (our demo prints: ball 69%!)
 - each glance is a **weighted blend**: the token's meaning-seat
   (lesson 04!) gets pulled toward what it attended to — `it` starts
-  generic and comes out robot-flavored 🤖
+  generic and comes out ball-flavored ⚽
 - and it happens **many times in parallel** (multi-head: one head
   tracking grammar, another names, another distance…) and **layer after
   layer**, meanings sharpening each pass.
@@ -44,8 +45,8 @@ flowchart TB
     s["'The robot dropped the ball because IT was heavy'"]
     subgraph att["👀 attention - for the token 'it'"]
         q["'it' asks: who am I about?"]
-        w["learned weights:<br/>robot 65% · ball 5% · heavy 14%"]
-        blend["blend: 'it' comes out<br/>ROBOT-flavored 🤖"]
+        w["learned weights:<br/>ball 69% · heavy 16% · robot 6%"]
+        blend["blend: 'it' comes out<br/>BALL-flavored ⚽"]
         q --> w --> blend
     end
     subgraph tf["🏗️ transformer = stack it deep"]
@@ -87,8 +88,9 @@ python3 demo/attention_toy.py
 ```
 
 Real dot-products, real softmax, hand-made seats: watch `it` choose
-`robot` at 65%. Then change `it`'s vector in the file to be ball-shaped
-(`[0.8, 0.0, 0.1, 0.2]`) and rerun — watch the glance flip. You just did
+`ball` at 69% — the heavy thing. Then make `it` robot-shaped
+(`[0.5, 0.6, 0.1, 0.1]`, as if the sentence ended *"…because it was
+tired"*) and rerun — watch the glance flip to `robot`. You just did
 what training does with the red pen: moved a seat, changed a mind.
 
 ## ⏭️ Next

@@ -43,7 +43,7 @@ flowchart LR
     ctx["📝 pieces so far<br/>'The dog chased the'"]
     m["🧠 model"]
     probs["📊 scores for ALL pieces<br/>cat 24% · ball 17% ·<br/>car 9% · … stapler ~0%"]
-    dial["🎛️ temperature<br/>0: top pick, safe<br/>1: sample the odds<br/>2: chaos"]
+    dial["🎛️ temperature<br/>0: top pick, more deterministic<br/>1: sample the odds, balanced<br/>2: more random"]
     pick["🧩 picked: 'cat'"]
     ctx --> m -->|"1 one full scoreboard"| probs -->|"2 sample"| dial --> pick
     pick -->|"3 glue on, repeat -<br/>this is why answers STREAM"| ctx
