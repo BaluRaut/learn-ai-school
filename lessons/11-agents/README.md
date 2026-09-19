@@ -24,7 +24,8 @@ Now give him three school privileges:
    picnic."*
 3. **🎫 A hall pass**: permission to go do things and come back.
 
-And he works the **agent loop**: *think → act → look → repeat*:
+And he works the **agent loop**: *think → act → look → repeat* — until the goal is met, or a
+step budget, timeout or repeated failure says stop:
 
 > **Think**: "Picnic. First: how many kids? I'll check the roster."
 > **Act**: calls `roster.count()` — writes a tool-call, not prose.
@@ -51,7 +52,7 @@ flowchart LR
     act["🧰 ACT<br/>writes a tool call:<br/>roster.count()"]
     look["👀 LOOK<br/>result lands on the desk:<br/>23 kids"]
     done["✅ goal met - report back"]
-    guard["🚧 guardrails: read-only default ·<br/>caps · human sign-off · logs"]
+    guard["🚧 guardrails: read-only default ·<br/>caps · human sign-off · logs ·<br/>max steps · timeout · stop on repeated failure"]
     goal --> think -->|"1"| act -->|"2 harness executes"| look -->|"3 loop"| think
     think -->|"4 eventually"| done
     guard -.-> act
@@ -65,7 +66,8 @@ flowchart LR
 - **Agent** = LLM + tools + loop + goal. RAG (L10) is one tool an agent
   might call; "agentic RAG" = deciding *when* to search.
 - Design levers: which tools (capability), which model (judgment),
-  loop limits (runaway protection), memory/scratchpads for long tasks,
+  loop limits — max steps, a timeout, stop on repeated failure
+  (runaway protection), memory/scratchpads for long tasks,
   and **evals** — measure task success, not vibes.
 - Multi-agent = students delegating to students (a researcher, a
   writer, a checker). Powerful, and multiplies the compounding-error
