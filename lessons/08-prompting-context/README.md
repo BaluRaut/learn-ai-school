@@ -23,7 +23,8 @@ its thousand modes shows up.** The craft:
 - **Say exactly what you want**: format, length, audience, constraints.
 - **Show, don't just tell**: one or two examples of the output you want
   (**few-shot**) beats paragraphs of description.
-- **Let it think**: "work step by step, THEN answer" — remember
+- **Give it room to think** (multi-step problems): "show the working, THEN
+  the answer" — remember
   lesson 05: each written token conditions the next, so writing the
   reasoning literally builds a ramp to better answers.
 
@@ -32,8 +33,8 @@ only N pages (the **context window** — measured in lesson 03's tokens!).
 Everything — your instructions, the conversation so far, pasted
 documents, the answer being written — must fit on that ONE desk. Slide a
 new page on and an old page slides off (why long chats "forget" the
-beginning). And attention (lesson 06) means the middle of a crowded desk
-gets skimmed — models recall best what's at the **start and end**.
+beginning). And a very crowded desk is harder to use reliably — models often recall
+the **start and end** best ("lost in the middle" is a measured effect, not a law).
 
 ## 🗺️ Diagram
 
@@ -45,8 +46,8 @@ flowchart TB
         doc["📎 pasted docs/examples"]
         ans["✍️ the answer being written - also on the desk!"]
     end
-    tips["🗣️ the craft: role · exact ask ·<br/>show examples · let it think first"]
-    lost["🕳️ NOT on the desk = does not exist:<br/>no memory between chats,<br/>middle of a crowded desk gets skimmed"]
+    tips["🗣️ the craft: role · exact ask ·<br/>show examples · constraints + output format"]
+    lost["🕳️ NOT in the current context = unavailable:<br/>past chats too, unless re-added,<br/>a very long context is harder to use reliably"]
     tips -->|"1 shapes"| desk
     desk -.->|"2 the catch"| lost
 ```
@@ -57,7 +58,8 @@ flowchart TB
   desk), **user**, **assistant** turns — all just tokens on the desk.
 - Window sizes: ~128k tokens (≈ a 300-page book) is common; long ≠
   infinite, and quality degrades before limits ("lost in the middle").
-- There is **no memory between conversations** — "it remembers me" =
+- By default there is **no memory between conversations** (products add it
+  by re-inserting notes onto the desk) — "it remembers me" =
   the app quietly re-pasting notes onto the desk each time.
 - Prompting is **iteration, not incantation**: change one thing, compare
   outputs, keep what worked. "Prompt engineering" = that loop, done
@@ -83,8 +85,9 @@ B: "You are a witty office-newsletter writer. Announce our new coffee
 
 Run both. Then test the desk: paste a long article, ask *"what was my
 first sentence?"* early and again much later — watch the page slide off.
-Finally add "think step by step before answering" to a math question and
-compare. Three experiments, three lessons, five minutes.
+Finally, for a multi-step math question, compare a bare question with one
+that states the constraints and the output format you want ("show the
+working, then one line with the answer"). Three experiments, three lessons, five minutes.
 
 ## ⏭️ Next
 
