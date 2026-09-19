@@ -6,7 +6,7 @@
 
 ## 📦 What's in this branch
 
-The complete course — all 12 lessons. The finale: how image generators
+The complete core course — all 12 lessons (lesson 13 is the bonus MCP intro). The finale: how image generators
 work (**diffusion**), and how models got eyes and ears (**multimodal**).
 
 ## 🧒 Explain like I'm 5
