@@ -18,7 +18,7 @@ L = [  # num, slug, folder, title, analogy, minutes, color
  (10,"lesson-10-rag","10-rag","📖 RAG","The open-book exam, automated with the seating chart.",45,P2),
  (11,"lesson-11-agents","11-agents","📋 Agents &amp; tools","A student with a to-do list and a hall pass.",45,P2),
  (12,"lesson-12-diffusion","12-diffusion","📺 Diffusion &amp; multimodal","Un-blurring TV static, step by step, toward your words.",40,P2),
- (13,"lesson-13-mcp","13-mcp","🔌 Bonus: MCP","The universal plug — deep-dive course: <a href=&quot;https://baluraut.github.io/learn-mcp-school/&quot;>learn-mcp-school</a> 🔌",40,P2),
+ (13,"lesson-13-mcp","13-mcp","🔌 Bonus: MCP","The universal plug — deep-dive course: <a href=\"https://baluraut.github.io/learn-mcp-school/\">learn-mcp-school</a> 🔌",40,P2),
 ]
 
 BASE_CSS = """
@@ -111,13 +111,13 @@ SVG[4]=(f'{B} x="40" y="100" width="180" height="90" rx="12"/>{t(130,132,"🧩 t
  f'{sm(300,250,"distance = similarity →")}{sm(300,272,"semantic search, RAG (L10), king−man+woman≈queen 👑")}{num(150,261,3)}')
 SVG[5]=(f'{B} x="40" y="90" width="220" height="90" rx="12"/>{t(150,122,"📝 pieces so far")}{sm(150,148,"&#39;The dog chased the&#39;")}'
  f'{B} x="330" y="70" width="250" height="130" rx="12"/>{t(455,100,"📊 scoreboard over ALL pieces")}{sm(455,126,"cat 24% · ball 17% · car 9%")}{sm(455,148,"… stapler 0.0001%")}{sm(455,176,"one full scoreboard per step")}'
- f'{B} x="650" y="90" width="180" height="90" rx="12"/>{t(740,118,"🎛️ temperature")}{sm(740,142,"0: safe · 1: natural")}{sm(740,164,"2: chaos")}'
- f'{arr(260,135,326,135)}{num(293,118,1)}{arr(580,135,646,135)}{num(613,118,2)}'
+ f'{B} x="640" y="90" width="200" height="90" rx="12"/>{t(740,118,"🎛️ temperature")}{sm(740,142,"0: more deterministic")}{sm(740,164,"1: balanced · 2: more random")}'
+ f'{arr(260,135,326,135)}{num(293,118,1)}{arr(580,135,636,135)}{num(608,118,2)}'
  f'{B} x="330" y="230" width="250" height="55" rx="12"/>{t(455,258,"🧩 picked: &#39;cat&#39; — glue on")}'
  f'{arr(740,180,540,228)}{arr(330,255,150,184,DASH)}{num(240,225,3)}{sm(240,255,"repeat — that&#39;s why")}{sm(240,277,"answers STREAM")}')
 SVG[6]=(f'{S} x="40" y="40" width="870" height="60" rx="10"/>{t(475,76,"&#39;The robot dropped the ball because IT was heavy&#39;")}'
- f'{B} x="80" y="140" width="240" height="110" rx="12"/>{t(200,170,"👀 &#39;it&#39; glances around")}{sm(200,196,"learned weights:")}{sm(200,218,"robot 65% · heavy 14% · ball 5%")}'
- f'{B} x="400" y="140" width="220" height="110" rx="12"/>{t(510,170,"🎨 blend")}{sm(510,196,"&#39;it&#39; comes out")}{sm(510,218,"ROBOT-flavored 🤖")}'
+ f'{B} x="80" y="140" width="240" height="110" rx="12"/>{t(200,170,"👀 &#39;it&#39; glances around")}{sm(200,196,"learned weights:")}{sm(200,218,"ball 69% · heavy 16% · robot 6%")}'
+ f'{B} x="400" y="140" width="220" height="110" rx="12"/>{t(510,170,"🎨 blend")}{sm(510,196,"&#39;it&#39; comes out")}{sm(510,218,"BALL-flavored ⚽")}'
  f'{B} x="690" y="140" width="220" height="110" rx="12"/>{t(800,166,"🏗️ transformer")}{sm(800,190,"this, ×many heads,")}{sm(800,212,"×32 layers, ALL tokens")}{sm(800,234,"in parallel")}'
  f'{arr(200,100,200,136)}{num(180,118,1)}{arr(320,195,396,195)}{num(358,178,2)}{arr(620,195,686,195)}{num(653,178,3)}'
  f'{sm(475,290,"query·key similarity on the seats (L04) → softmax → weighted blend — demo prints these exact numbers")}')
@@ -126,16 +126,16 @@ SVG[7]=(f'{B} x="40" y="90" width="200" height="100" rx="12"/>{t(140,120,"📚 p
  f'{B} x="560" y="90" width="200" height="100" rx="12"/>{t(660,120,"⭐ RLHF")}{sm(660,144,"humans pick better →")}{sm(660,166,"taste-judge → nudge")}'
  f'{B} x="810" y="90" width="100" height="100" rx="12"/>{t(860,130,"🤖")}{sm(860,155,"the")}{sm(860,175,"assistant")}'
  f'{arr(240,140,296,140)}{num(268,123,1)}{arr(500,140,556,140)}{num(528,123,2)}{arr(760,140,806,140)}{num(783,123,3)}'
- f'{S} x="300" y="230" width="460" height="55" rx="12"/>{t(530,254,"🗒️ LoRA: freeze the brain, learn tiny sticky notes")}{sm(530,276,"~0.1% of the size · one GPU · swappable per customer")}'
+ f'{S} x="300" y="230" width="460" height="55" rx="12"/>{t(530,254,"🗒️ LoRA: freeze the brain, learn tiny sticky notes")}{sm(530,276,"tiny adapter · far fewer trainable parameters · base stays frozen")}'
  f'{arr(700,230,840,194,DASH)}{num(700,257,4)}')
 SVG[8]=(f'{B} x="60" y="60" width="500" height="200" rx="14"/>{t(310,90,"🪑 the desk - context window: N tokens, that&#39;s ALL there is")}'
  f'{S} x="85" y="110" width="210" height="50" rx="8"/>{sm(190,140,"📜 role + rules (system)")}'
  f'{S} x="310" y="110" width="225" height="50" rx="8"/>{sm(422,140,"💬 conversation - oldest slides off")}'
  f'{S} x="85" y="175" width="210" height="50" rx="8"/>{sm(190,205,"📎 pasted docs + examples")}'
  f'{S} x="310" y="175" width="225" height="50" rx="8"/>{sm(422,205,"✍️ the answer itself - also here!")}'
- f'{B} x="640" y="60" width="270" height="110" rx="12"/>{t(775,88,"🗣️ the craft")}{sm(775,112,"say who to be · exact ask ·")}{sm(775,134,"show examples (few-shot) ·")}{sm(775,156,"&#39;think step by step first&#39;")}'
+ f'{B} x="640" y="60" width="270" height="110" rx="12"/>{t(775,88,"🗣️ the craft")}{sm(775,112,"say who to be · exact ask ·")}{sm(775,134,"show examples (few-shot) ·")}{sm(775,156,"constraints + output format")}'
  f'{arr(640,120,564,120)}{num(602,103,1)}'
- f'{D} x="640" y="200" width="270" height="70" rx="12"/>{sm(775,228,"🕳️ not on the desk = doesn&#39;t exist:")}{sm(775,250,"no memory between chats · middle gets skimmed")}{num(620,235,2)}'
+ f'{D} x="640" y="200" width="270" height="92" rx="12"/>{sm(775,226,"🕳️ not in the current context = unavailable")}{sm(775,248,"past chats too, unless re-added ·")}{sm(775,270,"long context: harder to use reliably")}{num(620,235,2)}'
  f'{sm(310,290,"same model, 10× better output — prompting is iteration, not incantation")}{num(90,290,3)}')
 SVG[9]=(f'{B} x="40" y="90" width="230" height="100" rx="12"/>{t(155,120,"❓ thin-shelf question")}{sm(155,144,"&#39;books about Mongolian")}{sm(155,166,"pirates?&#39;")}'
  f'{B} x="340" y="90" width="260" height="100" rx="12"/>{t(470,118,"🧠 the machine")}{sm(470,142,"produce the LIKELIEST continuation")}{sm(470,164,"truth was never in the loss (L02)")}'
@@ -152,13 +152,13 @@ SVG[10]=(f'{S} x="40" y="40" width="360" height="115" rx="12"/>{t(220,66,"1 befo
  f'{B} x="290" y="200" width="220" height="80" rx="12"/>{t(400,228,"📍 nearest seats")}{sm(400,252,"= most relevant chunks")}'
  f'{B} x="580" y="180" width="330" height="110" rx="12"/>{t(745,208,"🪑 the desk")}{sm(745,232,"question + those chunks +")}{sm(745,254,"&#39;answer ONLY from these, cite&#39; 🧾")}'
  f'{arr(130,200,280,145,DASH)}{num(200,168,2)}{arr(220,240,286,240)}{num(253,223,3)}{arr(510,240,576,240)}{num(543,223,4)}'
- f'{sm(475,300,"facts → RAG · style → fine-tune (L07) — the rule of rules")}')
+ f'{sm(475,300,"changing / external facts → RAG · stable behaviour or style → fine-tuning (L07) — a rule of thumb")}')
 SVG[11]=(f'{B} x="40" y="100" width="190" height="90" rx="12"/>{t(135,130,"📋 goal")}{sm(135,154,"&#39;organize the")}{sm(135,176,"class picnic&#39;")}'
  f'{B} x="300" y="100" width="180" height="90" rx="12"/>{t(390,130,"🧠 THINK")}{sm(390,154,"next-token planning")}{sm(390,176,"in words (L05!)")}'
  f'{B} x="550" y="100" width="170" height="90" rx="12"/>{t(635,130,"🧰 ACT")}{sm(635,154,"writes a tool call:")}{sm(635,176,"roster.count()")}'
  f'{B} x="790" y="100" width="120" height="90" rx="12"/>{t(850,130,"👀 LOOK")}{sm(850,154,"result → desk:")}{sm(850,176,"23 kids")}'
  f'{arr(230,145,296,145)}{num(263,128,1)}{arr(480,145,546,145)}{num(513,128,2)}{arr(720,145,786,145)}'
- f'{arr(850,190,390,230,DASH)}{arr(390,230,390,194,DASH)}{num(620,225,3)}{sm(620,250,"loop until the goal is met")}'
+ f'{arr(850,190,390,230,DASH)}{arr(390,230,390,194,DASH)}{num(620,225,3)}{sm(620,250,"loop until the goal is met — or max steps · timeout · repeated failure")}'
  f'{S} x="60" y="255" width="850" height="40" rx="10"/>{sm(485,280,"🚧 guardrails: read-only tools by default · spending caps · human sign-off for field-trip forms · logs of every step")}{num(60,255,4)}')
 SVG[12]=(f'{S} x="40" y="40" width="400" height="110" rx="12"/>{t(240,66,"🎨 homework, millions of times")}'
  f'{B} x="60" y="80" width="110" height="55" rx="10"/>{sm(115,105,"🐱 photo")}{sm(115,125,"+noise ×1000")}'
@@ -196,7 +196,7 @@ def card(n):
       f'<a class="go" href="lesson-diagrams.html#l{n:02d}">See the diagram ↗</a></div>')
 
 INDEX = head("Learn AI the school way — tokens to agents",
-  "12 branch-by-branch AI lessons: tokens, embeddings, attention, RLHF, LoRA, prompting, RAG, agents, diffusion — ELI5 school analogies, diagrams and zero-dependency Python labs.",
+  "12 branch-by-branch AI lessons + bonus MCP: tokens, embeddings, attention, RLHF, LoRA, prompting, RAG, agents, diffusion — ELI5 school analogies, diagrams and zero-dependency Python labs.",
   DSEC_CSS) + MARKER + f'''
 <div class="wrap">
 
@@ -297,7 +297,7 @@ git checkout lesson-01-what-is-ai       # then lesson by lesson</code></pre>
 '''
 
 DIAGRAMS = head("Lesson diagrams — Learn AI School",
-  "All 12 AI lessons as numbered entity diagrams — tokens, embeddings, attention, RLHF, RAG, agents, diffusion — on one page.",
+  "All 12 AI lessons + bonus MCP as numbered entity diagrams — tokens, embeddings, attention, RLHF, RAG, agents, diffusion — on one page.",
   DSEC_CSS + TOC_CSS) + MARKER + f'''
 <div class="wrap">
 <header>
@@ -377,7 +377,7 @@ TRADEOFFS = head("Before & trade-offs — Learn AI School",
 {term("tune", P1, "🗒️ Fine-tuning &amp; LoRA vs RAG vs prompting — lessons 07, 08, 10",
   "Before this decision tree existed (~2022)",
   "If you wanted a model to know or behave differently, the only lever was full retraining — museum-budget territory. Today there are three ladders, and picking wrong burns months: prompting (free, per-request), RAG (fresh facts on the desk), fine-tuning/LoRA (bake in style).",
-  ["prompting: instant, free, reversible — always try FIRST","RAG: fresh + auditable facts, update = re-index tonight","LoRA: real style/format/domain-voice gains on one GPU"],
+  ["prompting: instant, free, reversible — always try FIRST","RAG: fresh + auditable facts, update = re-index tonight","LoRA: real style/format/domain-voice gains with a small adapter"],
   ["prompting can't add knowledge or unbreakable habits","RAG lives and dies by retrieval quality (garbage in…)","tuning: costs, drifts stale, and CANNOT reliably add facts","teams routinely fine-tune when a better prompt would have done"],
   ["order of operations: prompt → RAG for facts → tune for style","tune when format/tone must be deep and consistent (and prompts maxed out)"],
   ["'let's fine-tune so it knows our docs' — that's RAG's job, always","before you've even written a decent system prompt"])}
