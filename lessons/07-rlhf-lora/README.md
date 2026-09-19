@@ -33,8 +33,9 @@ Raising an assistant takes four schools:
 4. **🗒️ Sticky notes** (**LoRA**): want the assistant to also speak
    YOUR company's tone? Retraining billions of dials is buying the kid a
    new brain. LoRA instead **freezes the brain** and learns tiny add-on
-   note-sheets (~0.1% of the size) whose corrections ride on top.
-   Cheap (one GPU!), swappable (one model, many note-sets), removable.
+   note-sheets (a tiny fraction of the model's parameters) whose corrections
+   ride on top. Far cheaper to train than the whole brain, swappable (one
+   model, many note-sets), removable.
 
 ## 🗺️ Diagram
 
@@ -58,7 +59,7 @@ flowchart LR
   optimization (PPO/DPO-family). DPO = a popular shortcut that skips the
   separate judge.
 - **LoRA** (Low-Rank Adaptation): freeze weights `W`, learn small
-  `A×B` add-ons so effective weights = `W + AB`. Fine-tune on one GPU;
+  `A×B` add-ons so effective weights = `W + AB`. Fine-tune with far fewer trainable parameters;
   ship "adapters", not models. QLoRA = same on a quantized brain —
   hobbyist-budget tuning.
 - When to tune at all: **style/format/domain-voice → fine-tune (LoRA);

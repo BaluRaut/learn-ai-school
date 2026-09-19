@@ -36,8 +36,8 @@ holds forty. You can't put the whole book on the desk. Enter the
 
 New handbook page? Re-index tonight — the kid "knows" it tomorrow.
 Compare fine-tuning (lesson 07): months of etiquette classes can't
-reliably add FACTS. **Facts → RAG; style → fine-tune.** The rule of
-rules.
+reliably add FACTS. **Changing or external facts → RAG; stable behaviour or style →
+fine-tuning.** The rule of thumb — not a law.
 
 ## 🗺️ Diagram
 
