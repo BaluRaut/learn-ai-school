@@ -24,13 +24,20 @@ a { color:var(--blue); } h1 { font-size:1.9rem; }
 .reset { margin-top:20px; background:var(--accent); color:#fff; border:none; border-radius:10px; padding:10px 18px; font:inherit; font-weight:700; cursor:pointer; }
 footer { margin-top:44px; border-top:1px solid var(--line); padding-top:16px; color:var(--muted); font-size:.88rem; }
 </style>
+
 <style id="i18n-css">
 #lang-pick{position:fixed;top:10px;right:10px;z-index:9999;font:600 .85rem -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--card,#fff);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:6px 12px;box-shadow:0 2px 10px rgba(0,0,0,.08);cursor:pointer}
 html[lang="mr"] body{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 html[lang="mr"] svg text{font-family:"Noto Sans Devanagari","Mukta","Devanagari Sangam MN","Nirmala UI",sans-serif}
+.i18n-en{display:block;font-size:.86em;line-height:1.35;color:var(--muted,#64748b);font-weight:400;margin-top:2px;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.i18n-en.i{display:inline;margin:0 0 0 .3em;font-size:.92em;opacity:.85}
+.i18n-en.i::before{content:"· "}
+h1 .i18n-en,h2 .i18n-en{font-size:.58em;margin-top:4px} h3 .i18n-en{font-size:.78em}
+.lab .i18n-en,.wk .i18n-en{color:inherit;opacity:.85}
+html[lang="mr"] .i18n-en{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 @media print{#lang-pick{display:none}}
 </style></head><body><select aria-label="Language / भाषा" id="lang-pick" onchange="schoolSetLang(this.value)">
-<option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select><div class="wrap">
+<option value="both">🇮🇳🇬🇧 मराठी + English</option><option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select><div class="wrap">
 <p data-en='&lt;a href="index.html"&gt;← Back to the course home&lt;/a&gt;'><a href="index.html">← कोर्सच्या मुख्य पानाकडे परत</a></p>
 <h1 data-en="🧪 The 🧠 AI quiz">🧪 🧠 AI प्रश्नमंजुषा</h1>
 <p class="sub" data-en="10 questions — pick an answer, get the why. One attempt per question (until reset).
@@ -74,20 +81,41 @@ function update() {
 function reset() { answered={}; score=0; render(); update(); }
 render(); update();
 </script>
+
 <script id="i18n-js">
+var I18N_INLINE={A:1,SPAN:1,CODE:1,B:1,I:1,EM:1,STRONG:1,BUTTON:1,LABEL:1,SUMMARY:1,SMALL:1,KBD:1};
 function schoolSetLang(l){
-  try{localStorage.setItem('school-lang',l)}catch(e){}
-  document.documentElement.setAttribute('lang',l);
+  if(l!=='en'&&l!=='mr'&&l!=='both') l='both';
+  try{localStorage.setItem('school-lang2',l)}catch(e){}
+  document.documentElement.setAttribute('lang', l==='en' ? 'en' : 'mr');
   document.querySelectorAll('[data-en]').forEach(function(el){
     if(!el.hasAttribute('data-mr')) el.setAttribute('data-mr', el.innerHTML);
-    el.innerHTML = (l==='en') ? el.getAttribute('data-en') : el.getAttribute('data-mr');
+    var en=el.getAttribute('data-en'), mr=el.getAttribute('data-mr');
+    var svg = el.namespaceURI && el.namespaceURI.indexOf('svg')>-1;
+    if(svg){
+      el.innerHTML = (l==='en') ? en : mr;
+      var t=el.querySelector('title'); if(t) t.remove();
+      if(l==='both'){ t=document.createElementNS('http://www.w3.org/2000/svg','title'); t.textContent=en.replace(/<[^>]+>/g,''); el.insertBefore(t, el.firstChild); }
+      return;
+    }
+    if(l==='en') el.innerHTML = en;
+    else if(l==='mr') el.innerHTML = mr;
+    else if(en.replace(/\s+/g,' ').trim()===mr.replace(/\s+/g,' ').trim()) el.innerHTML = mr;
+    else {
+      var e2=en.replace(/<span class="(ln|num|wk)">[\s\S]*?<\/span>\s*/g,'');
+      if(e2.charAt(0)!=='<' && mr.charAt(0)!=='<'){           /* drop the prefix both languages share, e.g. "01 · 🏢 " */
+        var i=0; while(i<e2.length&&i<mr.length&&e2.charAt(i)===mr.charAt(i)) i++;
+        var cut=e2.lastIndexOf(' ',i); if(cut>0 && cut<e2.length-1) e2=e2.slice(cut+1);
+      }
+      el.innerHTML = mr + '<span class="i18n-en'+(I18N_INLINE[el.tagName]?' i':'')+'">'+e2+'</span>';
+    }
   });
   document.querySelectorAll('[data-en-ph]').forEach(function(el){
     if(!el.hasAttribute('data-mr-ph')) el.setAttribute('data-mr-ph', el.getAttribute('placeholder'));
-    el.setAttribute('placeholder', (l==='en') ? el.getAttribute('data-en-ph') : el.getAttribute('data-mr-ph'));
+    el.setAttribute('placeholder', (l==='en') ? el.getAttribute('data-en-ph') : (l==='mr' ? el.getAttribute('data-mr-ph') : el.getAttribute('data-mr-ph')+' / '+el.getAttribute('data-en-ph')));
   });
   var p=document.getElementById('lang-pick'); if(p) p.value=l;
 }
-(function(){ var l='mr'; try{ l=localStorage.getItem('school-lang')||'mr'; }catch(e){}
+(function(){ var l='both'; try{ l=localStorage.getItem('school-lang2')||'both'; }catch(e){}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){schoolSetLang(l)}); else schoolSetLang(l); })();
 </script></body></html>
