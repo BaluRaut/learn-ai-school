@@ -84,9 +84,10 @@
 .svgz{position:relative;cursor:zoom-in;display:block;width:100%}
 .svgz .zhint{display:none;position:absolute;right:8px;top:8px;background:rgba(15,23,42,.78);color:#fff;font-size:.78rem;padding:3px 8px;border-radius:999px;pointer-events:none}
 @media (max-width:760px){.svgz .zhint{display:block}}
-#zoomov{position:fixed;inset:0;z-index:9999;background:rgba(2,6,23,.92);overflow:auto;display:none;-webkit-overflow-scrolling:touch}
+#zoomov{position:fixed;inset:0;z-index:9999;background:rgba(2,6,23,.97);overflow:auto;display:none;-webkit-overflow-scrolling:touch}
 #zoomov.on{display:block}
-#zoomov .zin{background:#fff;margin:48px 12px 24px;border-radius:12px;padding:8px;width:max(1100px,calc(100vw - 24px));box-sizing:border-box}
+#zoomov .zfix{display:block!important;border:0!important;margin:0!important;padding:0!important;background:none!important;box-shadow:none!important;max-width:none!important}
+#zoomov .zin{background:var(--card,#fff);margin:48px 12px 24px;border-radius:12px;padding:8px;width:max(1100px,calc(100vw - 24px));box-sizing:border-box}
 #zoomov .zin svg{width:100%;height:auto;display:block}
 #zoomov .zx{position:fixed;top:10px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:#fff;color:#0f172a;font-size:20px;font-weight:700;cursor:pointer}
 </style>
@@ -340,7 +341,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 document.querySelectorAll('.dsec svg').forEach(svg=>{if(svg.closest('.lab')||svg.parentElement.closest('svg'))return;
   let w=svg.parentElement;
   if(!w.classList.contains('svgz')){w=document.createElement('div');w.className='svgz';svg.parentNode.insertBefore(w,svg);w.appendChild(svg);w.insertAdjacentHTML('beforeend','<span class="zhint">🔍 ⤢</span>')}
-  w.addEventListener('click',()=>{const zin=ov.querySelector('.zin');zin.innerHTML='';zin.appendChild(svg.cloneNode(true));ov.classList.add('on');document.body.style.overflow='hidden';ov.scrollTo(0,0)});
+  w.addEventListener('click',()=>{const zin=ov.querySelector('.zin');zin.innerHTML='';let box=zin;const sec=svg.closest('.dsec'),gal=svg.closest('.gal');if(sec){const d=document.createElement('div');d.className=sec.className+' zfix';box.appendChild(d);box=d}if(gal){const d=document.createElement('div');d.className=gal.className+' zfix';d.setAttribute('style',gal.getAttribute('style')||'');box.appendChild(d);box=d;const e=document.createElement('div');e.className='dia zfix';box.appendChild(e);box=e}const cl=svg.cloneNode(true);const P=['fill','stroke','stroke-width','stroke-dasharray','opacity','fill-opacity','stroke-opacity','font-family','font-size','font-weight','letter-spacing'];const A=svg.querySelectorAll('*'),B=cl.querySelectorAll('*');A.forEach((e,k)=>{if(!(e instanceof SVGGraphicsElement)||!B[k])return;const cs=getComputedStyle(e);P.forEach(p=>B[k].style.setProperty(p,cs.getPropertyValue(p)))});box.appendChild(cl);ov.classList.add('on');document.body.style.overflow='hidden';ov.scrollTo(0,0)});
 });
 })();
 </script></div><!--/zoom-js-->
