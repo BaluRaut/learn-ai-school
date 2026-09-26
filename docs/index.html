@@ -103,7 +103,31 @@ h1 .i18n-en,h2 .i18n-en{font-size:.58em;margin-top:4px} h3 .i18n-en{font-size:.7
 .lab .i18n-en,.wk .i18n-en{color:inherit;opacity:.85}
 html[lang="mr"] .i18n-en{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
 @media print{#lang-pick{display:none}}
-</style></head>
+</style><style id="navfab-css">
+#navfab{position:fixed;right:18px;bottom:18px;z-index:9000;display:flex;flex-direction:column;align-items:flex-end;gap:10px;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+#navfab button.fb{border:0;cursor:pointer;border-radius:999px;box-shadow:0 6px 18px rgba(15,23,42,.28);display:flex;align-items:center;gap:8px;font-weight:700}
+#navfab .fb-main{background:var(--accent,#2563eb);color:#fff;height:52px;padding:0 18px 0 16px;font-size:1rem}
+#navfab .fb-main span.ic{font-size:1.35rem}
+#navfab .fb-top{background:var(--card,#fff);color:var(--ink,#0f172a);width:44px;height:44px;justify-content:center;font-size:1.2rem;border:1px solid var(--line,#e2e8f0);opacity:0;pointer-events:none;transition:opacity .2s}
+#navfab .fb-top.on{opacity:1;pointer-events:auto}
+#navpanel{position:fixed;right:18px;bottom:84px;z-index:9001;width:min(380px,calc(100vw - 36px));max-height:min(72vh,640px);display:none;flex-direction:column;background:var(--card,#fff);color:var(--ink,#0f172a);border:1px solid var(--line,#e2e8f0);border-radius:16px;box-shadow:0 18px 50px rgba(15,23,42,.35);overflow:hidden;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+#navpanel.on{display:flex}
+#navpanel .nh{padding:12px 14px 8px;border-bottom:1px solid var(--line,#e2e8f0)}
+#navpanel .nh b{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.95rem;margin-bottom:8px}
+#navpanel .nx{border:0;background:none;color:var(--muted,#64748b);font-size:1.1rem;cursor:pointer;padding:2px 6px;border-radius:8px}
+#navpanel input{width:100%;box-sizing:border-box;padding:8px 10px;border-radius:10px;border:1px solid var(--line,#cbd5e1);background:var(--bg,#f8fafc);color:var(--ink,#0f172a);font-size:.9rem}
+#navpanel .nb{overflow:auto;padding:6px 8px 10px}
+#navpanel .ng{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted,#64748b);margin:10px 8px 4px}
+#navpanel a{display:flex;gap:8px;align-items:baseline;padding:7px 10px;border-radius:9px;color:var(--ink,#0f172a);text-decoration:none;font-size:.9rem;line-height:1.3}
+#navpanel a:hover{background:color-mix(in srgb,var(--accent,#2563eb) 10%,transparent)}
+#navpanel a.cur{background:color-mix(in srgb,var(--accent,#2563eb) 16%,transparent);font-weight:700}
+#navpanel a .nn{flex:none;min-width:26px;text-align:center;font-weight:800;color:var(--accent,#2563eb)}
+#navpanel a small{display:block;font-size:.76rem;color:var(--muted,#64748b);font-weight:500;margin-top:1px}
+@media (max-width:640px){#navfab{right:12px;bottom:12px}#navfab .fb-main .lb{display:none}#navfab .fb-main{width:52px;padding:0;justify-content:center}
+ #navpanel{left:0;right:0;bottom:0;width:auto;max-height:78vh;border-radius:18px 18px 0 0}}
+@media print{#navfab,#navpanel{display:none!important}}
+</style>
+</head>
 <body><select aria-label="Language / भाषा" id="lang-pick" onchange="schoolSetLang(this.value)">
 <option value="both">🇮🇳🇬🇧 मराठी + English</option><option value="mr">🇮🇳 मराठी</option><option value="en">🇬🇧 English</option></select>
 <svg height="0" style="position:absolute" width="0"><defs><marker id="arw" markerheight="7" markerwidth="7" orient="auto-start-reverse" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 z" fill="#64748b"></path></marker></defs></svg>
@@ -382,5 +406,55 @@ function schoolSetLang(l){
 }
 (function(){ var l='both'; try{ l=localStorage.getItem('school-lang2')||'both'; }catch(e){}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){schoolSetLang(l)}); else schoolSetLang(l); })();
-</script></body>
+</script><div id="navfab-js"><script>
+(function(){
+const PAGES=[["index.html", "🏠 Course home", "🏠 कोर्स मुख्य पान"], ["lesson-diagrams.html", "🖼️ All lesson diagrams", "🖼️ सर्व धड्यांच्या आकृत्या"], ["quiz.html", "🧪 Quiz", "🧪 प्रश्नमंजुषा"], ["study-plan.html", "🗓️ Study plan", "🗓️ अभ्यास योजना"], ["before-and-tradeoffs.html", "⚖️ Before & trade-offs", "⚖️ आधी आणि फायदे-तोटे"]], PORTAL="https://baluraut.github.io/school/", HERE=location.pathname.split('/').pop()||'index.html';
+const mr=()=> (document.documentElement.lang||'').startsWith('mr');
+const L=(en,m)=> mr()? m+' · '+en.replace(/^[^\w\s(]+\s+/,'') : en;
+const fab=document.createElement('div');fab.id='navfab';
+fab.innerHTML='<button class="fb fb-top" aria-label="Back to top">↑</button><button class="fb fb-main" aria-label="Topics"><span class="ic">🧭</span><span class="lb">Topics</span></button>';
+const pan=document.createElement('div');pan.id='navpanel';pan.setAttribute('role','dialog');
+document.body.appendChild(pan);document.body.appendChild(fab);
+const top=fab.querySelector('.fb-top'),main=fab.querySelector('.fb-main');
+const txt=e=>(e.textContent||'').replace(/\s+/g,' ').trim();
+function items(){  // every lesson section and every page-level heading, in page order
+  const out=[];const seen=new Set();let k=0;
+  document.querySelectorAll('h2:not([id]), .school > h3').forEach(h=>{if(h.closest('section.dsec,#navpanel,#zoomov'))return;const host=h.matches('.school > h3')?h.parentElement:h;if(!host.id)host.id='nav-'+(++k)});
+  document.querySelectorAll('section.dsec[id], h2[id], section[id] > h2, .school[id]').forEach(e=>{
+    const sec=e.matches('section')?e:(e.closest('section.dsec')||null);
+    const target=sec&&sec.id?sec:e; if(!target.id||seen.has(target.id))return;
+    if(!sec&&e.closest('#navpanel,#zoomov'))return;
+    seen.add(target.id);
+    const h=sec?(sec.querySelector('h2,h3')||sec):(e.matches('.school')?(e.querySelector('h3')||e):e); const ln=h.querySelector&&h.querySelector('.ln');
+    const c=h.cloneNode(true); const en=c.querySelector&&c.querySelector('.i18n-en'); const et=en?txt(en):''; if(en)en.remove();
+    const lnc=c.querySelector&&c.querySelector('.ln'); let n=''; if(lnc){n=txt(lnc); lnc.remove()}
+    let t=txt(c); if(!t)return; const cut=x=>x.length>90?x.slice(0,88)+'…':x;
+    out.push({id:target.id,n,t:cut(t),e:et&&et!==t?cut(et):''});
+  });
+  return out;
+}
+let cur=null;
+function build(){
+  const its=items();const q=(pan.querySelector('input')||{}).value||'';
+  const here=its.map(i=>`<a href="#${i.id}" data-id="${i.id}" class="${i.id===cur?'cur':''}"><span class="nn">${i.n||'•'}</span><span>${i.t}${i.e?`<small>${i.e}</small>`:''}</span></a>`).join('');
+  const pages=PAGES.filter(p=>p[0]!==HERE).map(p=>`<a href="${p[0]}"><span>${L(p[1],p[2])}</span></a>`).join('');
+  pan.innerHTML=`<div class="nh"><b>🧭 ${L('Jump to a topic','विषयावर जा')}<button class="nx" aria-label="close">✕</button></b><input type="search" placeholder="${mr()?'शोधा · filter…':'filter…'}" value="${q.replace(/"/g,'&quot;')}"></div>
+   <div class="nb">${its.length?`<div class="ng">${L('On this page','या पानावर')}</div><div class="here">${here}</div>`:''}
+   ${pages?`<div class="ng">${L('Other pages','इतर पाने')}</div>${pages}`:''}
+   ${PORTAL?`<div class="ng">${L('The School','शाळा')}</div><a href="${PORTAL}"><span>🏫 ${L('All schools','सर्व शाळा')}</span></a>`:''}</div>`;
+  const inp=pan.querySelector('input');inp.addEventListener('input',()=>{const v=inp.value.toLowerCase();pan.querySelectorAll('.nb a').forEach(a=>{a.style.display=!v||a.textContent.toLowerCase().includes(v)?'':'none'})});
+  inp.dispatchEvent(new Event('input'));
+}
+function open(){build();pan.classList.add('on');const c=pan.querySelector('a.cur');if(c)c.scrollIntoView({block:'center'});setTimeout(()=>{if(innerWidth>640)pan.querySelector('input').focus()},30)}
+function close(){pan.classList.remove('on')}
+main.addEventListener('click',e=>{e.stopPropagation();pan.classList.contains('on')?close():open()});
+pan.addEventListener('click',e=>{if(e.target.closest('.nx')){close();return}const a=e.target.closest('a');if(a&&a.getAttribute('href').startsWith('#'))close();e.stopPropagation()});
+document.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+top.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+addEventListener('scroll',()=>{top.classList.toggle('on',scrollY>600)},{passive:true});
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){cur=en.target.id;pan.querySelectorAll('.here a').forEach(a=>a.classList.toggle('cur',a.dataset.id===cur))}})},{rootMargin:'-35% 0px -60% 0px'});
+ items().forEach(i=>{const t=document.getElementById(i.id);if(t)io.observe(t)})}
+})();
+</script></div><!--/navfab-js-->
+</body>
 </html>
